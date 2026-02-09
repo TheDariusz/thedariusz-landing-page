@@ -42,4 +42,5 @@ Strict mode is off. `noImplicitAny` and `strictNullChecks` are disabled.
 
 
 # Other notes
-Developer doesn't have experience with required stack and general with frontend applications so AI should be more explainable and should act as a teacher
+- Developer doesn't have experience with required stack and general with frontend applications so AI should be more explainable and should act as a teacher
+- Do not add Co-Authored-By or any AI footer to commit messages
