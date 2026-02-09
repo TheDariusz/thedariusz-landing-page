@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { siteData } from "@/data/siteData";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Download } from "lucide-react";
+import { ArrowDown, Download, ChevronDown } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.png";
 
 const HeroSection = () => {
@@ -12,17 +12,23 @@ const HeroSection = () => {
 
   return (
     <section
-      className="min-h-screen flex items-center justify-center px-4 pt-20"
+      className="relative min-h-screen flex items-center justify-center px-4 pt-20 overflow-hidden"
       aria-label="Introduction"
     >
-      <div className="text-center max-w-2xl mx-auto">
+      {/* Background radial glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-purple-500/3 blur-[100px]" />
+      </div>
+
+      <div className="relative text-center max-w-2xl mx-auto">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <div className="w-48 h-48 md:w-52 md:h-52 mx-auto rounded-full overflow-hidden ring-2 ring-primary/50 ring-offset-4 ring-offset-background">
+          <div className="w-48 h-48 md:w-52 md:h-52 mx-auto rounded-full overflow-hidden ring-2 ring-primary/50 ring-offset-4 ring-offset-background shadow-[0_0_40px_hsl(347_77%_50%/0.15)]">
             <img
               src={profilePhoto}
               alt={`Portrait of ${siteData.name}`}
@@ -76,13 +82,23 @@ const HeroSection = () => {
             variant="outline"
             size="lg"
             asChild
-            className="border-border text-foreground hover:bg-secondary px-8"
+            className="border-primary/50 text-foreground hover:bg-primary/10 hover:border-primary px-8"
           >
             <a href={siteData.cvLink} download>
               <Download className="w-4 h-4 mr-2" />
               {siteData.hero.ctaSecondary}
             </a>
           </Button>
+        </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 0.5 }}
+          className="mt-16"
+        >
+          <ChevronDown className="w-6 h-6 mx-auto text-muted-foreground animate-bounce-subtle" />
         </motion.div>
       </div>
     </section>
