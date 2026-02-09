@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/80 backdrop-blur-md border-b border-border" : "bg-transparent"
+        isScrolled ? "bg-background/90 backdrop-blur-lg border-b border-border shadow-lg shadow-background/50" : "bg-transparent"
       }`}
       role="banner"
     >
@@ -58,7 +58,7 @@ const Header = () => {
           <a href={siteData.socialLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
             <Twitter className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
           </a>
-          <Button variant="outline" size="sm" asChild className="ml-2 border-border text-foreground hover:bg-secondary">
+          <Button variant="outline" size="sm" asChild className="ml-2 border-primary/50 text-foreground hover:bg-primary/10 hover:border-primary">
             <a href={siteData.cvLink} download>
               <Download className="w-4 h-4 mr-2" />
               Download CV
@@ -78,7 +78,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMobileOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-md border-b border-border">
+        <div className="md:hidden bg-background/95 backdrop-blur-lg border-b border-border">
           <nav className="container mx-auto px-4 py-6 flex flex-col gap-4" aria-label="Mobile navigation">
             {siteData.navLinks.map((link) => (
               <button
@@ -100,7 +100,7 @@ const Header = () => {
                 <Twitter className="w-5 h-5 text-muted-foreground" />
               </a>
             </div>
-            <Button variant="outline" size="sm" asChild className="w-fit border-border text-foreground">
+            <Button variant="outline" size="sm" asChild className="w-fit border-primary/50 text-foreground hover:bg-primary/10">
               <a href={siteData.cvLink} download>
                 <Download className="w-4 h-4 mr-2" />
                 Download CV

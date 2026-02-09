@@ -3,7 +3,7 @@ import { siteData } from "@/data/siteData";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border py-12 px-4" role="contentinfo">
+    <footer className="section-deep border-t-2 border-primary/30 py-12 px-4" role="contentinfo">
       <div className="container mx-auto max-w-4xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
           {/* Business Info */}

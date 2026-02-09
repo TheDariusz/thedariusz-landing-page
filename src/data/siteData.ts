@@ -3,7 +3,7 @@ export const siteData = {
   tagline: "Software Engineer | Backend & Integration Specialist",
   logo: {
     prefix: "dev",
-    dot: ".",
+    dot: "■",
     main: "TheDariusz",
   },
   email: "thedariusz@gmail.com",
@@ -23,6 +23,12 @@ export const siteData = {
     ctaPrimary: "Get in Touch",
     ctaSecondary: "Download CV",
   },
+  stats: [
+    { value: "4+", label: "Years Experience" },
+    { value: "10+", label: "Enterprise Projects" },
+    { value: "Java & Spring Boot", label: "Core Expertise" },
+    { value: "AI-Driven", label: "Development Approach" },
+  ],
   about: {
     heading: "About Me",
     professional: [
@@ -38,33 +44,41 @@ export const siteData = {
     categories: [
       {
         name: "Backend",
+        icon: "Server",
         items: ["Java", "Spring Boot", "REST APIs", "SOAP", "Apache Camel"],
       },
       {
         name: "Data & ORM",
+        icon: "Database",
         items: ["MySQL", "MariaDB", "PostgreSQL", "Hibernate", "JPA", "JOOQ"],
       },
       {
         name: "Data Analysis & Reporting",
+        icon: "BarChart3",
         items: ["SQL", "Python", "PowerBI", "Dashboards", "KPI Monitoring"],
       },
       {
         name: "DevOps & Tools",
+        icon: "GitBranch",
         items: ["Docker", "Git", "GitHub Actions", "Maven", "JIRA", "Confluence", "JetBrains", "Keycloak"],
       },
       {
         name: "Testing",
+        icon: "TestTube",
         items: ["JUnit 5", "Mockito", "AssertJ"],
       },
       {
         name: "Management & Business",
+        icon: "Briefcase",
         items: ["Agile", "SAFe", "Scrum", "Business Analysis", "UML"],
       },
     ],
   },
   contact: {
     heading: "Get in Touch",
+    subheading: "Let's Work Together",
     subtitle: "Have a project in mind or just want to say hello? I'd love to hear from you.",
+    location: "Warsaw, Poland",
     submitLabel: "Send Message",
     fallbackText: "Or email me directly at",
   },
