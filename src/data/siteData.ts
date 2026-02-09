@@ -26,19 +26,19 @@ export const siteData = {
   about: {
     heading: "About Me",
     professional: [
-      "With over a decade of experience in software engineering, I specialize in building robust, scalable backend systems using Java and the Spring Boot ecosystem. My expertise spans designing RESTful and SOAP APIs, implementing complex business logic, and integrating enterprise-grade systems that power critical operations.",
-      "I've contributed to projects across industries including fintech, logistics, and telecommunications — always focusing on clean architecture, performance optimization, and reliable data management. I'm proficient in working with relational databases (MySQL, PostgreSQL, MariaDB), ORM frameworks (Hibernate, JPA, JOOQ), and workflow engines like Apache Camel.",
-      "Beyond writing code, I bring strong skills in business analysis, Agile methodologies (Scrum, SAFe), and cross-functional team collaboration. I believe in bridging the gap between technical and business stakeholders to deliver solutions that truly matter.",
+      "With four years of hands-on experience in software engineering, I specialize in building robust, scalable backend systems using Java and the Spring Boot ecosystem. My expertise spans designing RESTful and SOAP APIs, implementing complex business logic, and integrating enterprise-grade systems that power critical operations.",
+      "What sets me apart is my strong analytical mindset and deep understanding of business processes. I act as a bridge between business requirements and technical implementation, translating complex stakeholder needs into clean, maintainable code. My background in business analysis allows me to see the bigger picture while delivering precise technical solutions.",
+      "I'm an active AI user who embraces spec-driven development — leveraging AI as a tool for achieving business goals faster and more effectively while using fewer resources. However, every output remains under my full control, backed by proper tests and validations. AI accelerates my workflow; it never replaces my judgment.",
     ],
     beyondWork:
-      "Outside of engineering, I'm passionate about continuous learning and exploring emerging technologies. I contribute to open-source projects, enjoy mentoring junior developers, and stay curious about the intersection of software and real-world impact.",
+      "Outside of engineering, I'm fascinated by astronomy and physics — the kind of thinking that reminds me how vast the world is beyond code. I stay active through regular fitness routines, constantly explore emerging technologies and automation tools, and believe that continuous learning is the foundation of both personal and professional growth.",
   },
   skills: {
     heading: "Skills & Technologies",
     categories: [
       {
         name: "Backend",
-        items: ["Java 8-24", "Spring Boot 3", "REST APIs", "SOAP", "Apache Camel"],
+        items: ["Java", "Spring Boot", "REST APIs", "SOAP", "Apache Camel"],
       },
       {
         name: "Data & ORM",
@@ -68,7 +68,14 @@ export const siteData = {
     submitLabel: "Send Message",
     fallbackText: "Or email me directly at",
   },
+  business: {
+    name: "TheDariusz Dariusz Szczepański",
+    nip: "PL9521789822",
+    address: "Ignacego Paderewskiego 144B/104, 04-438 Warsaw, Poland",
+    email: "thedariusz@gmail.com",
+    phone: "+48 512 241 841",
+  },
   footer: {
-    copyright: `© ${new Date().getFullYear()} Dariusz Szczepański. All rights reserved.`,
+    copyright: `© ${new Date().getFullYear()} TheDariusz Dariusz Szczepański. All rights reserved.`,
   },
 };
