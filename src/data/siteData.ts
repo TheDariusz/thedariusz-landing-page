@@ -6,7 +6,10 @@ export const siteData = {
     main: "TheDariusz",
   },
   email: "thedariusz@gmail.com",
-  cvLink: "#",
+  cvLinks: {
+    en: "/Dariusz_Szczepanski_resume-en.pdf",
+    pl: "/Dariusz_Szczepanski_resume-pl.pdf",
+  },
   socialLinks: {
     github: "https://github.com",
     linkedin: "https://linkedin.com",

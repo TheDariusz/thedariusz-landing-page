@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { siteData } from "@/data/siteData";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Download, ChevronDown } from "lucide-react";
+import CVDownloadButton from "@/components/CVDownloadButton";
+import { ArrowDown, ChevronDown } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.png";
 
 const HeroSection = () => {
@@ -78,17 +79,7 @@ const HeroSection = () => {
             <ArrowDown className="w-4 h-4 mr-2" />
             {siteData.hero.ctaPrimary}
           </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            asChild
-            className="border-primary/50 text-foreground hover:bg-primary/10 hover:border-primary px-8"
-          >
-            <a href={siteData.cvLink} download>
-              <Download className="w-4 h-4 mr-2" />
-              {siteData.hero.ctaSecondary}
-            </a>
-          </Button>
+          <CVDownloadButton size="lg" className="px-8" />
         </motion.div>
 
         {/* Scroll indicator */}

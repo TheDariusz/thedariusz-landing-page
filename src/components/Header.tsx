@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Github, Linkedin, Twitter, Download } from "lucide-react";
+import { Menu, X, Github, Linkedin, Twitter } from "lucide-react";
 import { siteData } from "@/data/siteData";
 import { Button } from "@/components/ui/button";
+import CVDownloadButton from "@/components/CVDownloadButton";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -58,12 +59,7 @@ const Header = () => {
           <a href={siteData.socialLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
             <Twitter className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
           </a>
-          <Button variant="outline" size="sm" asChild className="ml-2 border-primary/50 text-foreground hover:bg-primary/10 hover:border-primary">
-            <a href={siteData.cvLink} download>
-              <Download className="w-4 h-4 mr-2" />
-              Download CV
-            </a>
-          </Button>
+          <CVDownloadButton size="sm" className="ml-2" />
         </div>
 
         {/* Mobile Toggle */}
@@ -100,12 +96,7 @@ const Header = () => {
                 <Twitter className="w-5 h-5 text-muted-foreground" />
               </a>
             </div>
-            <Button variant="outline" size="sm" asChild className="w-fit border-primary/50 text-foreground hover:bg-primary/10">
-              <a href={siteData.cvLink} download>
-                <Download className="w-4 h-4 mr-2" />
-                Download CV
-              </a>
-            </Button>
+            <CVDownloadButton size="sm" className="w-fit" />
           </nav>
         </div>
       )}
