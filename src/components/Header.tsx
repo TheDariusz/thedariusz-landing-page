@@ -30,7 +30,7 @@ const Header = () => {
         {/* Logo */}
         <a href="#" className="flex items-center gap-0 text-lg font-light tracking-tight" aria-label="Home">
           <span className="text-muted-foreground">{siteData.logo.prefix}</span>
-          <span className="text-primary font-bold text-xl mx-[1px]">{siteData.logo.dot}</span>
+          <span className="inline-block w-[7px] h-[7px] bg-primary rounded-[1px] mx-[3px] self-end mb-[5px]" aria-hidden="true" />
           <span className="text-foreground font-semibold">{siteData.logo.main}</span>
         </a>
 

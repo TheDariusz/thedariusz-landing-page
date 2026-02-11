@@ -3,7 +3,6 @@ export const siteData = {
   tagline: "Software Engineer | Backend & Integration Specialist",
   logo: {
     prefix: "dev",
-    dot: "■",
     main: "TheDariusz",
   },
   email: "thedariusz@gmail.com",
