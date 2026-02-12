@@ -20,16 +20,16 @@ npm run test:watch   # Run tests in watch mode
 
 ## Architecture
 
-Personal landing page built with React 18, TypeScript, Vite, Tailwind CSS, and shadcn/ui. Originally scaffolded with Lovable.
+Personal landing page built with React 19, TypeScript, Vite 7, Tailwind CSS 4, and shadcn/ui. Originally scaffolded with Lovable.
 
 ### Key patterns
 
-- **Single-page app**: One main route (`/`) defined in `src/App.tsx` with react-router-dom. The Index page composes section components in order: Header, HeroSection, StatsBar, AboutSection, SkillsSection, ContactSection, Footer, ScrollToTop.
+- **Single-page app**: No routing — `src/App.tsx` composes section components in order: Header, HeroSection, StatsBar, AboutSection, SkillsSection, ContactSection, Footer, ScrollToTop.
 - **Centralized content**: All site copy, nav links, skills, stats, and business info live in `src/data/siteData.ts`. Section components read from this object — edit content there, not in components.
 - **Path alias**: `@/` maps to `./src/` (configured in tsconfig.json and vite.config.ts).
 - **UI components**: `src/components/ui/` contains shadcn/ui primitives (do not edit manually — use `npx shadcn-ui@latest add <component>`). Custom page sections live in `src/components/`.
-- **Animations**: Framer Motion for entrance animations. Custom Tailwind keyframes (`fade-in-up`, `bounce-subtle`) defined in `tailwind.config.ts`.
-- **Styling**: Dark theme only. Colors use HSL CSS variables defined in `src/index.css`. Custom utility classes: `.text-gradient`, `.glow-accent`, `.badge-glow`, `.section-alt`, `.section-deep`, `.accent-underline`.
+- **Animations**: Motion (v12, import from `motion/react`) for entrance animations. Custom Tailwind keyframes (`fade-in-up`, `bounce-subtle`) defined in `src/index.css` `@theme` block.
+- **Styling**: Dark theme only. Tailwind CSS 4 with CSS-first config — all theme tokens in `src/index.css` `@theme` block (no `tailwind.config.ts`). Colors use HSL CSS variables. Custom utility classes defined with `@utility`: `.text-gradient`, `.glow-accent`, `.badge-glow`, `.section-alt`, `.section-deep`, `.accent-underline`.
 - **Fonts**: Inter (sans) and JetBrains Mono (mono), loaded via Google Fonts in `src/index.css`.
 
 ### Testing

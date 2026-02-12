@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { siteData } from "@/data/siteData";
 import { Server, Database, BarChart3, GitBranch, TestTube, Briefcase } from "lucide-react";

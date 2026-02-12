@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { siteData } from "@/data/siteData";
 import { Button } from "@/components/ui/button";
 import CVDownloadButton from "@/components/CVDownloadButton";

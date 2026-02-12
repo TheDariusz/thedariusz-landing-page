@@ -1,45 +1,85 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
 
-@layer base {
-  :root {
-    --background: 222 47% 11%;
-    --foreground: 213 31% 91%;
+@theme {
+  --font-sans: "Inter", "system-ui", "sans-serif";
+  --font-mono: "JetBrains Mono", "monospace";
 
-    --background-alt: 217 33% 17%;
-    --background-deep: 222 71% 4%;
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-background-alt: hsl(var(--background-alt));
+  --color-background-deep: hsl(var(--background-deep));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
 
-    --card: 222 47% 8%;
-    --card-foreground: 213 31% 91%;
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
 
-    --popover: 222 47% 11%;
-    --popover-foreground: 213 31% 91%;
+  --animate-fade-in-up: fade-in-up 0.6s ease-out forwards;
+  --animate-bounce-subtle: bounce-subtle 2s ease-in-out infinite;
 
-    --primary: 347 77% 50%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 215 20% 65%;
-
-    --muted: 217 33% 17%;
-    --muted-foreground: 218 11% 65%;
-
-    --accent: 347 77% 50%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 217 33% 20%;
-    --input: 217 33% 20%;
-    --ring: 347 77% 50%;
-
-    --radius: 0.5rem;
-
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
   }
+
+  @keyframes bounce-subtle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+}
+
+/* shadcn/ui design tokens */
+:root {
+  --background: 222 47% 11%;
+  --foreground: 213 31% 91%;
+
+  --background-alt: 217 33% 17%;
+  --background-deep: 222 71% 4%;
+
+  --card: 222 47% 8%;
+  --card-foreground: 213 31% 91%;
+
+  --popover: 222 47% 11%;
+  --popover-foreground: 213 31% 91%;
+
+  --primary: 347 77% 50%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 217 33% 17%;
+  --secondary-foreground: 215 20% 65%;
+
+  --muted: 217 33% 17%;
+  --muted-foreground: 218 11% 65%;
+
+  --accent: 347 77% 50%;
+  --accent-foreground: 0 0% 100%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 217 33% 20%;
+  --input: 217 33% 20%;
+  --ring: 347 77% 50%;
+
+  --radius: 0.5rem;
 }
 
 @layer base {
@@ -56,32 +96,31 @@
   }
 }
 
-@layer utilities {
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-red-400;
-  }
+@utility text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-red-400;
+}
 
-  .glow-accent {
-    box-shadow: 0 0 20px hsl(347 77% 50% / 0.15);
-  }
+@utility glow-accent {
+  box-shadow: 0 0 20px hsl(347 77% 50% / 0.15);
+}
 
-  .badge-glow:hover {
+@utility badge-glow {
+  &:hover {
     box-shadow: 0 0 12px hsl(347 77% 50% / 0.25);
   }
+}
 
-  .section-alt {
-    background-color: hsl(var(--background-alt));
-  }
+@utility section-alt {
+  background-color: hsl(var(--background-alt));
+}
 
-  .section-deep {
-    background-color: hsl(var(--background-deep));
-  }
+@utility section-deep {
+  background-color: hsl(var(--background-deep));
+}
 
-  .accent-underline {
-    @apply relative inline-block;
-  }
-
-  .accent-underline::after {
+@utility accent-underline {
+  @apply relative inline-block;
+  &::after {
     content: '';
     @apply absolute -bottom-2 left-0 w-12 h-0.5 bg-primary rounded-full;
   }
