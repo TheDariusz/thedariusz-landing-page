@@ -11,9 +11,9 @@ export const siteData = {
     pl: "/Dariusz_Szczepanski_resume-pl.pdf",
   },
   socialLinks: {
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
-    twitter: "https://x.com",
+    github: "https://github.com/thedariusz",
+    linkedin: "https://www.linkedin.com/in/dariusz-szczepanski-dev",
+    twitter: "https://x.com/thedariusz_dev",
   },
   navLinks: [
     { label: "About", href: "#about" },
@@ -62,7 +62,7 @@ export const siteData = {
       {
         name: "DevOps & Tools",
         icon: "GitBranch",
-        items: ["Docker", "Git", "GitHub Actions", "Maven", "JIRA", "Confluence", "JetBrains", "Keycloak"],
+        items: ["Docker", "Git", "GitHub Actions", "Maven", "JIRA", "Confluence", "JetBrains", "OAuth2"],
       },
       {
         name: "Testing",
