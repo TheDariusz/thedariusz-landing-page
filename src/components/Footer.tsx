@@ -1,5 +1,6 @@
-import { Github, Linkedin, Twitter, Briefcase } from "lucide-react";
+import { Briefcase } from "lucide-react";
 import { siteData } from "@/data/siteData";
+import SocialLinks from "@/components/SocialLinks";
 
 const Footer = () => {
   return (
@@ -26,15 +27,7 @@ const Footer = () => {
           {/* Social Links */}
           <div className="flex flex-col items-start md:items-end justify-end gap-4">
             <div className="flex items-center gap-5">
-              <a href={siteData.socialLinks.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <Github className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
-              </a>
-              <a href={siteData.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                <Linkedin className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
-              </a>
-              <a href={siteData.socialLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
-                <Twitter className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
-              </a>
+              <SocialLinks iconClassName="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
             </div>
           </div>
         </div>

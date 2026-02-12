@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Github, Linkedin, Twitter } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { siteData } from "@/data/siteData";
-import { Button } from "@/components/ui/button";
 import CVDownloadButton from "@/components/CVDownloadButton";
+import SocialLinks from "@/components/SocialLinks";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -50,15 +50,7 @@ const Header = () => {
 
         {/* Desktop Right */}
         <div className="hidden md:flex items-center gap-3">
-          <a href={siteData.socialLinks.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            <Github className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
-          </a>
-          <a href={siteData.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <Linkedin className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
-          </a>
-          <a href={siteData.socialLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
-            <Twitter className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
-          </a>
+          <SocialLinks iconClassName="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
           <CVDownloadButton size="sm" className="ml-2" />
         </div>
 
@@ -86,15 +78,7 @@ const Header = () => {
               </button>
             ))}
             <div className="flex items-center gap-4 pt-4 border-t border-border">
-              <a href={siteData.socialLinks.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <Github className="w-5 h-5 text-muted-foreground" />
-              </a>
-              <a href={siteData.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                <Linkedin className="w-5 h-5 text-muted-foreground" />
-              </a>
-              <a href={siteData.socialLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
-                <Twitter className="w-5 h-5 text-muted-foreground" />
-              </a>
+              <SocialLinks iconClassName="w-5 h-5 text-muted-foreground" />
             </div>
             <CVDownloadButton size="sm" className="w-fit" />
           </nav>

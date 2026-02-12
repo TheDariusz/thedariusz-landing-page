@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Send, Mail, MapPin, Github, Linkedin, Twitter } from "lucide-react";
+import { Send, Mail, MapPin } from "lucide-react";
+import SocialLinks from "@/components/SocialLinks";
 import { z } from "zod";
 
 const contactSchema = z.object({
@@ -90,18 +91,10 @@ const ContactSection = () => {
             </div>
 
             <div className="flex items-center gap-5 pt-4">
-              <a href={siteData.socialLinks.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-                <Github className="w-5 h-5" />
-                <span className="text-sm">GitHub</span>
-              </a>
-              <a href={siteData.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-                <Linkedin className="w-5 h-5" />
-                <span className="text-sm">LinkedIn</span>
-              </a>
-              <a href={siteData.socialLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-                <Twitter className="w-5 h-5" />
-                <span className="text-sm">Twitter</span>
-              </a>
+              <SocialLinks
+                showLabels
+                className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+              />
             </div>
           </motion.div>
 
