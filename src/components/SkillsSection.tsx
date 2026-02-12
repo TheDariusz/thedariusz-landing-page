@@ -1,7 +1,7 @@
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { siteData } from "@/data/siteData";
-import { Server, Database, BarChart3, GitBranch, TestTube, Briefcase } from "lucide-react";
+import { Server, Database, BarChart3, GitBranch, TestTube, Briefcase, BrainCircuit } from "lucide-react";
 
 const iconMap: Record<string, React.ReactNode> = {
   Server: <Server className="w-5 h-5 text-primary" />,
@@ -10,6 +10,7 @@ const iconMap: Record<string, React.ReactNode> = {
   GitBranch: <GitBranch className="w-5 h-5 text-primary" />,
   TestTube: <TestTube className="w-5 h-5 text-primary" />,
   Briefcase: <Briefcase className="w-5 h-5 text-primary" />,
+  BrainCircuit: <BrainCircuit className="w-5 h-5 text-primary" />,
 };
 
 const SkillsSection = () => {
@@ -29,13 +30,15 @@ const SkillsSection = () => {
         </motion.h2>
 
         <div className="grid gap-6 md:grid-cols-2">
-          {siteData.skills.categories.map((category, catIndex) => (
+          {siteData.skills.categories.map((category, catIndex, arr) => {
+            const isLastOdd = catIndex === arr.length - 1 && arr.length % 2 === 1;
+            return (
             <motion.div
               key={category.name}
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: catIndex * 0.08 }}
-              className="bg-card border border-border rounded-lg p-5 hover:border-primary/30 transition-colors duration-300"
+              className={`bg-card border border-border rounded-lg p-5 hover:border-primary/30 transition-colors duration-300${isLastOdd ? " md:col-span-2" : ""}`}
             >
               <div className="flex items-center gap-3 mb-4">
                 {iconMap[category.icon]}
@@ -54,7 +57,8 @@ const SkillsSection = () => {
                 ))}
               </div>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

@@ -74,6 +74,11 @@ export const siteData = {
         icon: "Briefcase",
         items: ["Agile", "SAFe", "Scrum", "Business Analysis", "UML"],
       },
+      {
+        name: "AI",
+        icon: "BrainCircuit",
+        items: ["Spec-Driven Development", "RAG", "Agentic Workflow", "Claude Code", "Prompt Engineering", "n8n"],
+      },
     ],
   },
   contact: {
