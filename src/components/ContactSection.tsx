@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Send, Mail, MapPin } from "lucide-react";
+import { Send, Mail, MapPin, Loader2 } from "lucide-react";
 import SocialLinks from "@/components/SocialLinks";
 import { z } from "zod";
 
@@ -21,8 +21,9 @@ const ContactSection = () => {
   const { toast } = useToast();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const result = contactSchema.safeParse(form);
     if (!result.success) {
@@ -34,11 +35,28 @@ const ContactSection = () => {
       return;
     }
     setErrors({});
-    toast({
-      title: "Message sent!",
-      description: "Thanks for reaching out. I'll get back to you soon.",
-    });
-    setForm({ name: "", email: "", message: "" });
+    setIsSubmitting(true);
+    try {
+      const response = await fetch(siteData.contact.webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(result.data),
+      });
+      if (!response.ok) throw new Error("Request failed");
+      toast({
+        title: "Message sent!",
+        description: "Thanks for reaching out. I'll get back to you soon.",
+      });
+      setForm({ name: "", email: "", message: "" });
+    } catch {
+      toast({
+        title: "Something went wrong",
+        description: `Could not send your message. Please email me directly at ${siteData.email}.`,
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (field: string, value: string) => {
@@ -113,6 +131,7 @@ const ContactSection = () => {
                 value={form.name}
                 onChange={(e) => handleChange("name", e.target.value)}
                 aria-label="Your name"
+                disabled={isSubmitting}
                 className="bg-secondary/50 border-border focus:border-primary/50 text-foreground placeholder:text-muted-foreground"
                 required
               />
@@ -125,6 +144,7 @@ const ContactSection = () => {
                 value={form.email}
                 onChange={(e) => handleChange("email", e.target.value)}
                 aria-label="Your email"
+                disabled={isSubmitting}
                 className="bg-secondary/50 border-border focus:border-primary/50 text-foreground placeholder:text-muted-foreground"
                 required
               />
@@ -137,14 +157,28 @@ const ContactSection = () => {
                 onChange={(e) => handleChange("message", e.target.value)}
                 aria-label="Your message"
                 rows={5}
+                disabled={isSubmitting}
                 className="bg-secondary/50 border-border focus:border-primary/50 text-foreground placeholder:text-muted-foreground resize-none"
                 required
               />
               {errors.message && <p className="text-sm text-primary mt-1">{errors.message}</p>}
             </div>
-            <Button type="submit" className="bg-primary text-primary-foreground hover:bg-primary/90 w-full px-8">
-              <Send className="w-4 h-4 mr-2" />
-              {siteData.contact.submitLabel}
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="bg-primary text-primary-foreground hover:bg-primary/90 w-full px-8"
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  {siteData.contact.submittingLabel}
+                </>
+              ) : (
+                <>
+                  <Send className="w-4 h-4 mr-2" />
+                  {siteData.contact.submitLabel}
+                </>
+              )}
             </Button>
           </motion.form>
         </div>

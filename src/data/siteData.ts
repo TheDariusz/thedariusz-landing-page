@@ -87,7 +87,9 @@ export const siteData = {
     subtitle: "Have a project in mind or just want to say hello? I'd love to hear from you.",
     location: "Warsaw, Poland",
     submitLabel: "Send Message",
+    submittingLabel: "Sending...",
     fallbackText: "Or email me directly at",
+    webhookUrl: "https://n8n.thedariusz.com/webhook/972def4a-2294-400f-a8f4-72df7db8e442",
   },
   business: {
     name: "TheDariusz Dariusz Szczepański",
