@@ -83,12 +83,13 @@ Displayed as categorized tag/badge groups (NO proficiency bars):
 
 | Category | Technologies |
 |---|---|
-| **Backend** | Java 8-24, Spring Boot 3, REST/SOAP APIs, Apache Camel |
-| **Data & ORM** | MySQL/MariaDB/PostgreSQL, Hibernate/JPA/JOOQ |
+| **Backend** | Java, Spring Boot, REST APIs, SOAP, Apache Camel |
+| **Data & ORM** | MySQL, MariaDB, PostgreSQL, Hibernate, JPA, JOOQ |
 | **Data Analysis & Reporting** | SQL, Python, PowerBI, Dashboards, KPI Monitoring |
-| **DevOps & Tools** | Docker, Git/GitHub/GitHub Actions, Maven, JIRA, Confluence, JetBrains, Keycloak |
+| **DevOps & Tools** | Docker, Git, GitHub Actions, Maven, JIRA, Confluence, JetBrains, OAuth2 |
 | **Testing** | JUnit 5, Mockito, AssertJ |
-| **Management & Business** | Project Management (Agile/SAFe/Scrum), Business Analysis, UML Process Mapping |
+| **Management & Business** | Agile, SAFe, Scrum, Business Analysis, UML |
+| **AI** | Spec-Driven Development, RAG, Agentic Workflow, Claude Code, Prompt Engineering, n8n |
 
 #### Contact Section
 - **Contact form** (lightweight): Name, Email, Message fields
