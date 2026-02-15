@@ -1,17 +1,22 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
 import ContactSection from "@/components/ContactSection";
 
 beforeEach(() => {
   vi.restoreAllMocks();
 });
 
+function fillForm(name = "John", email = "john@example.com", message = "Hello there") {
+  fireEvent.change(screen.getByLabelText("Your name"), { target: { value: name } });
+  fireEvent.change(screen.getByLabelText("Your email"), { target: { value: email } });
+  fireEvent.change(screen.getByLabelText("Your message"), { target: { value: message } });
+}
+
 describe("ContactSection form validation", () => {
   it("shows validation errors when submitting empty form", () => {
     render(<ContactSection />);
 
-    const submitButton = screen.getByRole("button", { name: /send message/i });
-    fireEvent.click(submitButton);
+    fireEvent.click(screen.getByRole("button", { name: /send message/i }));
 
     expect(screen.getByText("Name is required")).toBeInTheDocument();
     expect(screen.getByText("Message is required")).toBeInTheDocument();
@@ -19,10 +24,7 @@ describe("ContactSection form validation", () => {
 
   it("shows email validation error for invalid email", () => {
     render(<ContactSection />);
-
-    fireEvent.change(screen.getByLabelText("Your name"), { target: { value: "John" } });
-    fireEvent.change(screen.getByLabelText("Your email"), { target: { value: "not-an-email" } });
-    fireEvent.change(screen.getByLabelText("Your message"), { target: { value: "Hello" } });
+    fillForm("John", "not-an-email", "Hello");
 
     fireEvent.click(screen.getByRole("button", { name: /send message/i }));
 
@@ -58,10 +60,7 @@ describe("ContactSection form submission", () => {
     const emailInput = screen.getByLabelText("Your email") as HTMLInputElement;
     const messageInput = screen.getByLabelText("Your message") as HTMLTextAreaElement;
 
-    fireEvent.change(nameInput, { target: { value: "John" } });
-    fireEvent.change(emailInput, { target: { value: "john@example.com" } });
-    fireEvent.change(messageInput, { target: { value: "Hello there" } });
-
+    fillForm();
     fireEvent.click(screen.getByRole("button", { name: /send message/i }));
 
     await waitFor(() => {
@@ -75,10 +74,7 @@ describe("ContactSection form submission", () => {
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response("OK", { status: 200 }));
     render(<ContactSection />);
 
-    fireEvent.change(screen.getByLabelText("Your name"), { target: { value: "John" } });
-    fireEvent.change(screen.getByLabelText("Your email"), { target: { value: "john@example.com" } });
-    fireEvent.change(screen.getByLabelText("Your message"), { target: { value: "Hello there" } });
-
+    fillForm();
     fireEvent.click(screen.getByRole("button", { name: /send message/i }));
 
     await waitFor(() => {
@@ -101,17 +97,27 @@ describe("ContactSection form submission", () => {
     const emailInput = screen.getByLabelText("Your email") as HTMLInputElement;
     const messageInput = screen.getByLabelText("Your message") as HTMLTextAreaElement;
 
-    fireEvent.change(nameInput, { target: { value: "John" } });
-    fireEvent.change(emailInput, { target: { value: "john@example.com" } });
-    fireEvent.change(messageInput, { target: { value: "Hello there" } });
-
+    fillForm();
     fireEvent.click(screen.getByRole("button", { name: /send message/i }));
 
-    // After error, form should still have the user's data so they can retry
     await waitFor(() => {
       expect(nameInput.value).toBe("John");
       expect(emailInput.value).toBe("john@example.com");
       expect(messageInput.value).toBe("Hello there");
+    });
+  });
+
+  it("preserves form data when webhook returns non-2xx", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response("", { status: 500 }));
+    render(<ContactSection />);
+
+    const nameInput = screen.getByLabelText("Your name") as HTMLInputElement;
+
+    fillForm();
+    fireEvent.click(screen.getByRole("button", { name: /send message/i }));
+
+    await waitFor(() => {
+      expect(nameInput.value).toBe("John");
     });
   });
 
@@ -123,10 +129,7 @@ describe("ContactSection form submission", () => {
     vi.spyOn(globalThis, "fetch").mockReturnValue(pending);
     render(<ContactSection />);
 
-    fireEvent.change(screen.getByLabelText("Your name"), { target: { value: "John" } });
-    fireEvent.change(screen.getByLabelText("Your email"), { target: { value: "john@example.com" } });
-    fireEvent.change(screen.getByLabelText("Your message"), { target: { value: "Hello there" } });
-
+    fillForm();
     fireEvent.click(screen.getByRole("button", { name: /send message/i }));
 
     await waitFor(() => {
@@ -136,7 +139,8 @@ describe("ContactSection form submission", () => {
       expect(screen.getByRole("button", { name: /sending/i })).toBeDisabled();
     });
 
-    // Resolve the request to clean up
-    resolveRequest!(new Response("OK", { status: 200 }));
+    await act(async () => {
+      resolveRequest!(new Response("OK", { status: 200 }));
+    });
   });
 });
