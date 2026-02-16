@@ -12,7 +12,11 @@ Deploy the landing page as a static site on **Cloudflare Pages**, with three dom
 - ✅ Code on GitHub: `TheDariusz/thedariusz-landing-page` (branch: `main`)
 - ✅ Production build works: `npm run build` → outputs to `dist/`
 - ✅ n8n webhook is already live at `n8n.thedariusz.com` (subdomain on Cloudflare)
-- ⚠️ OG image (`/og-image.png`) referenced in meta tags but file is missing from `public/`
+- ✅ OG meta tags updated with absolute URLs (`https://thedariusz.com/og-image.png`)
+- ✅ Canonical URL added (`<link rel="canonical" href="https://thedariusz.com" />`)
+- ✅ `robots.txt` updated with sitemap reference
+- ✅ `sitemap.xml` created
+- ✅ OG image created (`public/og-image.png`, 1200×630px, domain-agnostic)
 - ⚠️ Build output has a 544 KB JS chunk (works fine, optimization can come later)
 
 ---
@@ -21,59 +25,23 @@ Deploy the landing page as a static site on **Cloudflare Pages**, with three dom
 
 Before deploying, fix a few things in the codebase:
 
-### 1a. Create OG image
-The `index.html` references `/og-image.png` for social media previews, but the file doesn't exist.
+### 1a. ✅ Create OG image
+Done. Created `public/og-image.png` (1200×630px) — branded image with profile photo, dev.TheDariusz logo, name, and "Software Engineer" tagline on dark background. Domain-agnostic (no URL) so it works across all three domains.
 
-**Options:**
-- Take a screenshot of the hero section and crop it to 1200×630px
-- Create a simple branded image with "dev ■ TheDariusz" logo on dark background
-- Use a tool like [og-image.vercel.app](https://og-image.vercel.app/) to generate one
+### 1b. ✅ Update OG meta tags with full URL
+Done. `index.html` now has:
+- `og:url` → `https://thedariusz.com`
+- `og:image` → `https://thedariusz.com/og-image.png`
+- `twitter:image` → `https://thedariusz.com/og-image.png`
 
-Save the file as `public/og-image.png` (1200×630px recommended).
+### 1c. ✅ Add canonical URL
+Done. Added `<link rel="canonical" href="https://thedariusz.com" />` to `index.html`.
 
-### 1b. Update OG meta tags with full URL
-Once you know your production URL, update `index.html`:
+### 1d. ✅ Update robots.txt
+Done. Simplified `public/robots.txt` with sitemap reference.
 
-```html
-<meta property="og:url" content="https://thedariusz.com" />
-<meta property="og:image" content="https://thedariusz.com/og-image.png" />
-<meta name="twitter:image" content="https://thedariusz.com/og-image.png" />
-```
-
-OG images must use absolute URLs to work correctly when shared on social media.
-
-### 1c. Add canonical URL
-Add to `<head>` in `index.html`:
-
-```html
-<link rel="canonical" href="https://thedariusz.com" />
-```
-
-This tells search engines that `thedariusz.com` is the primary URL (important since you have 3 domains).
-
-### 1d. Update robots.txt
-Current `robots.txt` is basic. Update `public/robots.txt`:
-
-```
-User-agent: *
-Allow: /
-
-Sitemap: https://thedariusz.com/sitemap.xml
-```
-
-### 1e. (Optional) Add sitemap.xml
-Create `public/sitemap.xml`:
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://thedariusz.com</loc>
-    <lastmod>2025-07-01</lastmod>
-    <priority>1.0</priority>
-  </url>
-</urlset>
-```
+### 1e. ✅ Add sitemap.xml
+Done. Created `public/sitemap.xml` with `lastmod: 2026-02-15`.
 
 ---
 
@@ -259,9 +227,13 @@ No additional setup needed. This is built into Cloudflare Pages.
 
 ## Summary: Action Checklist
 
-| # | Action | Where |
-|---|---|---|
-| 1 | Create OG image, update meta tags, add canonical URL | Codebase |
+| # | Action | Where | Status |
+|---|---|---|---|
+| 1a | Create OG image (1200×630px) | Manual | ✅ Done |
+| 1b | Update OG meta tags with absolute URLs | Codebase | ✅ Done |
+| 1c | Add canonical URL | Codebase | ✅ Done |
+| 1d | Update robots.txt | Codebase | ✅ Done |
+| 1e | Add sitemap.xml | Codebase | ✅ Done |
 | 2 | Push changes to GitHub | Terminal |
 | 3 | Create Cloudflare Pages project, connect to GitHub | Cloudflare Dashboard |
 | 4 | Add `thedariusz.com` + `www` as custom domains | Cloudflare Pages |
