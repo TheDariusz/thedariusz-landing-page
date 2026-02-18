@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://thedariusz.com/sitemap.xml
+Sitemap: https://thedariusz.dev/sitemap.xml
