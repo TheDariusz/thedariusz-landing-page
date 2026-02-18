@@ -3,9 +3,9 @@
 ## Overview
 
 Deploy the landing page as a static site on **Cloudflare Pages**, with three domains:
-- **thedariusz.dev** — primary domain (DNS on cyber_folks → moving to Cloudflare)
-- **thedariusz.com** — redirect to thedariusz.dev (DNS already on Cloudflare)
-- **thedariusz.pl** — redirect to thedariusz.dev (DNS on cyber_folks → moved to Cloudflare)
+- **thedariusz.dev** — primary domain (DNS on Cloudflare) ✅
+- **thedariusz.com** — redirect to thedariusz.dev (DNS on Cloudflare) ✅
+- **thedariusz.pl** — redirect to thedariusz.dev (DNS on Cloudflare) ✅
 
 ## Current State
 
@@ -14,11 +14,13 @@ Deploy the landing page as a static site on **Cloudflare Pages**, with three dom
 - ✅ n8n webhook is already live at `n8n.thedariusz.com` (subdomain on Cloudflare — stays unchanged)
 - ✅ OG image created (`public/og-image.png`, 1200×630px, domain-agnostic)
 - ✅ Cloudflare Pages project created and connected to GitHub
-- ✅ `thedariusz.com` + `www` added as custom domains on Pages
-- ✅ `www.thedariusz.com` → apex redirect rule set up
-- ✅ `thedariusz.pl` added to Cloudflare, nameservers changed at cyber_folks
-- ✅ `thedariusz.pl` redirect rule deployed (→ .com, needs updating to → .dev)
-- ⚠️ OG meta tags, canonical URL, robots.txt, sitemap.xml still reference thedariusz.com (needs updating to .dev)
+- ✅ `thedariusz.dev` is the primary custom domain on Pages, serving the site
+- ✅ `www.thedariusz.dev` → apex redirect rule deployed
+- ✅ `thedariusz.com` + `www` → 301 redirect to `thedariusz.dev` (dummy AAAA `100::` records)
+- ✅ `thedariusz.pl` + `www` → 301 redirect to `thedariusz.dev`
+- ✅ OG meta tags, canonical URL, robots.txt, sitemap.xml all reference `thedariusz.dev`
+- ✅ All three domains on Cloudflare DNS
+- ⚠️ `www.thedariusz.com` — DNS propagating (AAAA record added, awaiting resolution)
 - ⚠️ Build output has a 544 KB JS chunk (works fine, optimization can come later)
 
 ---
@@ -91,185 +93,94 @@ thedariusz.com was initially set up as the primary custom domain. Once thedarius
 
 ---
 
-## Step 4: Configure thedariusz.pl (redirect) ✅ Partially done
+## Step 4: Configure thedariusz.pl (redirect) ✅ Done
 
 ### 4a. ✅ Added thedariusz.pl as a site in Cloudflare (free plan)
 ### 4b. ✅ Updated nameservers at cyber_folks (propagation complete)
-### 4c. ✅ Redirect rule deployed
-
-Current redirect points to thedariusz.com — will be updated to thedariusz.dev in Step 10.
+### 4c. ✅ Redirect rule deployed (updated to → .dev in Step 10)
 
 ---
 
-## Step 5: Configure thedariusz.dev as primary domain
+## Step 5: Configure thedariusz.dev as primary domain ✅ Done
 
 The `.dev` TLD **requires HTTPS** (it's HSTS-preloaded). Cloudflare handles this automatically.
 
-### 5a. Add thedariusz.dev as a site in Cloudflare
-
-1. Cloudflare Dashboard → **Add a site** → enter `thedariusz.dev`
-2. Select Free plan
-3. Cloudflare will scan existing DNS records and assign nameservers
-
-### 5b. Update nameservers at cyber_folks
-
-1. Log in to cyber_folks panel
-2. Find domain `thedariusz.dev` → DNS/Nameserver settings
-3. Replace existing nameservers with the two Cloudflare provides
-4. ⏳ Wait for nameserver propagation (1–24 hours)
-
-### 5c. Verify domain is active on Cloudflare
-
-Check the Cloudflare Dashboard — `thedariusz.dev` status should change from "Pending" to **"Active"**.
+### 5a. ✅ Added thedariusz.dev as a site in Cloudflare (free plan)
+### 5b. ✅ Updated nameservers at cyber_folks (`sloan.ns.cloudflare.com`, `darwin.ns.cloudflare.com`)
+### 5c. ✅ Domain active on Cloudflare
 
 ---
 
-## Step 6: Add thedariusz.dev as custom domain on Pages
+## Step 6: Add thedariusz.dev as custom domain on Pages ✅ Done
 
-Once thedariusz.dev is active on Cloudflare:
-
-### 6a. Add custom domain
-
-1. In your Pages project → **Custom domains** tab
-2. Click **Set up a custom domain**
-3. Enter: `thedariusz.dev`
-4. Cloudflare will automatically add the DNS record (CNAME pointing to your Pages project)
-5. Click **Activate domain**
-6. Also add: `www.thedariusz.dev` (same process)
-
-### 6b. Verify DNS records
-
-In **Cloudflare Dashboard → thedariusz.dev → DNS → Records**, you should see:
-
-| Type | Name | Target | Proxy |
-|---|---|---|---|
-| CNAME | `thedariusz.dev` | `thedariusz-landing-page.pages.dev` | Proxied ☁️ |
-| CNAME | `www` | `thedariusz-landing-page.pages.dev` | Proxied ☁️ |
-
-### 6c. SSL/HTTPS
-
-In **SSL/TLS** settings for thedariusz.dev:
-- **Encryption mode:** Full (strict)
-- **Always Use HTTPS:** ON
-- **Automatic HTTPS Rewrites:** ON
-
-### 6d. Set up www → apex redirect
-
-In **Cloudflare Dashboard → thedariusz.dev → Rules → Redirect Rules**:
-- **Rule name:** `www to apex`
-- **When:** Hostname equals `www.thedariusz.dev`
-- **Then:** Dynamic redirect → `concat("https://thedariusz.dev", http.request.uri.path)`
-- **Status code:** 301 (permanent)
-- **Preserve query string:** ON
+### 6a. ✅ Added `thedariusz.dev` and `www.thedariusz.dev` as custom domains on Pages
+### 6b. ✅ DNS records configured (CNAME → `thedariusz-landing-page.pages.dev`)
+### 6c. ✅ SSL/HTTPS configured
+### 6d. ✅ www → apex redirect deployed (wildcard pattern: `https://www.thedariusz.dev/*` → `https://thedariusz.dev/${1}`)
 
 ---
 
-## Step 7: Verify thedariusz.dev serves the site
+## Step 7: Verify thedariusz.dev serves the site ✅ Done
 
-Before changing other domains, confirm:
-- [ ] `https://thedariusz.dev` loads the site correctly
-- [ ] `https://www.thedariusz.dev` → redirects to `https://thedariusz.dev`
-- [ ] All sections render properly
-- [ ] Contact form works
-- [ ] CV downloads work
-
----
-
-## Step 8: Update codebase URLs to thedariusz.dev
-
-Update all references from `thedariusz.com` to `thedariusz.dev` in the codebase:
-
-### Files to change:
-
-**`index.html`** (4 changes):
-- `<link rel="canonical" href="https://thedariusz.dev" />`
-- `<meta property="og:url" content="https://thedariusz.dev" />`
-- `<meta property="og:image" content="https://thedariusz.dev/og-image.png" />`
-- `<meta name="twitter:image" content="https://thedariusz.dev/og-image.png" />`
-
-**`public/robots.txt`** (1 change):
-- `Sitemap: https://thedariusz.dev/sitemap.xml`
-
-**`public/sitemap.xml`** (1 change):
-- `<loc>https://thedariusz.dev</loc>`
-
-> **Note:** `n8n.thedariusz.com` webhook URL in `src/data/siteData.ts` stays unchanged — it's a backend service on its own subdomain.
-
-After making these changes:
-1. Commit and push to `main`
-2. Cloudflare Pages will automatically rebuild and deploy
+- [x] `https://thedariusz.dev` loads the site correctly
+- [x] `https://www.thedariusz.dev` → redirects to `https://thedariusz.dev`
+- [ ] All sections render properly (manual check)
+- [ ] Contact form works (manual check)
+- [ ] CV downloads work (manual check)
 
 ---
 
-## Step 9: Reconfigure thedariusz.com as redirect domain
+## Step 8: Update codebase URLs to thedariusz.dev ✅ Done
 
-Now that thedariusz.dev is the primary domain:
+Updated all references from `thedariusz.com` to `thedariusz.dev`:
+- ✅ `index.html` — canonical, og:url, og:image, twitter:image (4 changes)
+- ✅ `public/robots.txt` — sitemap URL
+- ✅ `public/sitemap.xml` — loc URL
+- ✅ Committed and pushed to `main` → Cloudflare auto-deployed
 
-### 9a. Remove thedariusz.com as Pages custom domain
-
-1. In your Pages project → **Custom domains** tab
-2. Remove `thedariusz.com` and `www.thedariusz.com` as custom domains
-
-### 9b. Remove old www → apex redirect rule
-
-Delete the existing `www to apex` redirect rule for thedariusz.com (no longer needed as a Pages domain).
-
-### 9c. Add redirect rules for thedariusz.com → thedariusz.dev
-
-In **Cloudflare Dashboard → thedariusz.com → Rules → Redirect Rules**:
-
-**Rule:** `thedariusz.com to .dev`
-- **When (Custom filter expression):**
-  `(http.host eq "thedariusz.com") or (http.host eq "www.thedariusz.com")`
-- **Then:** Dynamic redirect → `concat("https://thedariusz.dev", http.request.uri.path)`
-- **Status code:** 301 (permanent)
-- **Preserve query string:** ON
-
-> ⚠️ **Important:** `n8n.thedariusz.com` must NOT be affected. The redirect rule only matches the exact hostnames `thedariusz.com` and `www.thedariusz.com`, so the `n8n` subdomain will continue working independently.
-
-### 9d. Add a DNS record for thedariusz.com to enable the redirect
-
-After removing thedariusz.com from Pages custom domains, you need a DNS record so the redirect rule can fire. Add a dummy AAAA record:
-
-| Type | Name | Target | Proxy |
-|---|---|---|---|
-| AAAA | `thedariusz.com` | `100::` | Proxied ☁️ |
-| AAAA | `www` | `100::` | Proxied ☁️ |
-
-_(Proxied dummy records let Cloudflare intercept the request and apply redirect rules.)_
+> `n8n.thedariusz.com` webhook URL in `src/data/siteData.ts` unchanged — backend service on its own subdomain.
 
 ---
 
-## Step 10: Update thedariusz.pl redirect to point to .dev
+## Step 9: Reconfigure thedariusz.com as redirect domain ✅ Done
 
-Update the existing redirect rule for thedariusz.pl:
+### 9a. ✅ Removed `thedariusz.com` and `www.thedariusz.com` from Pages custom domains
+### 9b. ✅ Removed old www → apex redirect rule
+### 9c. ✅ Redirect rule deployed: `thedariusz.com to .dev`
+- Custom filter: `(http.host eq "thedariusz.com") or (http.host eq "www.thedariusz.com")`
+- Dynamic redirect → `concat("https://thedariusz.dev", http.request.uri.path)`
+- 301 permanent, preserve query string
 
-In **Cloudflare Dashboard → thedariusz.pl → Rules → Redirect Rules**:
+### 9d. ✅ Dummy AAAA `100::` record added for apex (auto-created during rule deployment)
+### 9e. ⚠️ AAAA `100::` record for `www` added — DNS propagating
 
-Edit the existing `thedariusz.pl to .com` rule:
+> `n8n.thedariusz.com` unaffected — redirect rule only matches exact hostnames.
+
+---
+
+## Step 10: Update thedariusz.pl redirect to point to .dev ✅ Done
+
+Updated existing redirect rule from `.com` to `.dev`:
 - **Rule name:** `thedariusz.pl to .dev`
-- **When (Custom filter expression):**
-  `(http.host eq "thedariusz.pl") or (http.host eq "www.thedariusz.pl")`
-- **Then:** Dynamic redirect → `concat("https://thedariusz.dev", http.request.uri.path)`
-- **Status code:** 301 (permanent)
-- **Preserve query string:** ON
+- Covers both `thedariusz.pl` and `www.thedariusz.pl`
+- 301 redirect to `https://thedariusz.dev`
 
 ---
 
 ## Step 11: Post-deployment verification
 
 ### Functional checks
-- [ ] `https://thedariusz.dev` — site loads correctly
-- [ ] `https://www.thedariusz.dev` → redirects to `https://thedariusz.dev`
-- [ ] `https://thedariusz.com` → redirects to `https://thedariusz.dev`
-- [ ] `https://www.thedariusz.com` → redirects to `https://thedariusz.dev`
-- [ ] `http://thedariusz.com` → redirects to `https://thedariusz.dev`
-- [ ] `https://thedariusz.pl` → redirects to `https://thedariusz.dev`
-- [ ] `https://www.thedariusz.pl` → redirects to `https://thedariusz.dev`
-- [ ] `https://n8n.thedariusz.com` — still works (n8n unaffected)
-- [ ] Contact form submits successfully
-- [ ] CV downloads work (both EN and PL)
-- [ ] Social links open correct profiles
+- [x] `https://thedariusz.dev` — site loads correctly (HTTP 200)
+- [x] `https://www.thedariusz.dev` → 301 to `https://thedariusz.dev`
+- [x] `https://thedariusz.com` → 301 to `https://thedariusz.dev`
+- [ ] `https://www.thedariusz.com` → `https://thedariusz.dev` (⚠️ DNS propagating)
+- [x] `http://thedariusz.com` → 301 to `https://thedariusz.dev`
+- [x] `https://thedariusz.pl` → 301 to `https://thedariusz.dev`
+- [x] `https://www.thedariusz.pl` → 301 to `https://thedariusz.dev`
+- [x] `https://n8n.thedariusz.com` — still works (HTTP 200)
+- [ ] Contact form submits successfully (manual check)
+- [ ] CV downloads work (both EN and PL) (manual check)
+- [ ] Social links open correct profiles (manual check)
 - [ ] OG image shows up when sharing link on LinkedIn/X (use [opengraph.xyz](https://www.opengraph.xyz/) to test)
 - [ ] Mobile responsive — check on real phone
 
@@ -303,16 +214,15 @@ No additional setup needed. This is built into Cloudflare Pages.
 |---|---|---|---|
 | 1 | Pre-deployment fixes (OG image, meta, sitemap, robots) | Codebase | ✅ Done |
 | 2 | Create Cloudflare Pages project, connect to GitHub | Cloudflare Dashboard | ✅ Done |
-| 3 | Add `thedariusz.com` + `www` as custom domains | Cloudflare Pages | ✅ Done |
-| 4a | Add `thedariusz.pl` to Cloudflare, change nameservers | Cloudflare + cyber_folks | ✅ Done |
-| 4b | Add redirect rule for `.pl` | Cloudflare Rules | ✅ Done (needs updating to → .dev) |
-| 5 | Add `thedariusz.dev` to Cloudflare, change nameservers | Cloudflare + cyber_folks | **Next** |
-| 6 | Add `thedariusz.dev` + `www` as custom domains on Pages | Cloudflare Pages | |
-| 7 | Verify `thedariusz.dev` serves the site | Browser | |
-| 8 | Update codebase URLs to `.dev` (index.html, robots, sitemap) | Codebase + push | |
-| 9 | Reconfigure `thedariusz.com` as redirect → `.dev` | Cloudflare | |
-| 10 | Update `thedariusz.pl` redirect → `.dev` | Cloudflare Rules | |
-| 11 | Run full verification checklist | Browser | |
+| 3 | Add `thedariusz.com` + `www` as custom domains | Cloudflare Pages | ✅ Done (later reconfigured as redirect) |
+| 4 | Add `thedariusz.pl` to Cloudflare, redirect → `.dev` | Cloudflare + cyber_folks | ✅ Done |
+| 5 | Add `thedariusz.dev` to Cloudflare, change nameservers | Cloudflare + cyber_folks | ✅ Done |
+| 6 | Add `thedariusz.dev` + `www` as custom domains on Pages | Cloudflare Pages | ✅ Done |
+| 7 | Verify `thedariusz.dev` serves the site | Browser | ✅ Done |
+| 8 | Update codebase URLs to `.dev` (index.html, robots, sitemap) | Codebase + push | ✅ Done |
+| 9 | Reconfigure `thedariusz.com` as redirect → `.dev` | Cloudflare | ✅ Done |
+| 10 | Update `thedariusz.pl` redirect → `.dev` | Cloudflare Rules | ✅ Done |
+| 11 | Run full verification checklist | Browser | ⏳ Mostly done (`www.thedariusz.com` DNS propagating) |
 | 12 | Submit `thedariusz.dev` to Google Search Console | Google Search Console | |
 
 ---
