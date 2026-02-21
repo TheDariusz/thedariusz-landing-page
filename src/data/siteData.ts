@@ -34,7 +34,7 @@ export const siteData = {
   about: {
     heading: "About Me",
     professional: [
-      "With four years of hands-on experience in software engineering, I specialize in building robust, scalable backend systems using Java and the Spring Boot ecosystem. My expertise spans designing RESTful and SOAP APIs, implementing complex business logic, and integrating enterprise-grade systems that power critical operations.",
+      "With four years of hands-on experience in software engineering, I specialize in building robust, scalable backend systems using Java and the Spring Boot ecosystem. My expertise spans designing RESTful APIs, implementing complex business logic, and integrating enterprise-grade systems that power critical operations.",
       "What sets me apart is my strong analytical mindset and deep understanding of business processes. I act as a bridge between business requirements and technical implementation, translating complex stakeholder needs into clean, maintainable code. My background in business analysis allows me to see the bigger picture while delivering precise technical solutions.",
       "I'm an active AI user who embraces spec-driven development — leveraging AI as a tool for achieving business goals faster and more effectively while using fewer resources. However, every output remains under my full control, backed by proper tests and validations. AI accelerates my workflow; it never replaces my judgment.",
     ],
@@ -47,7 +47,7 @@ export const siteData = {
       {
         name: "Backend",
         icon: "Server",
-        items: ["Java", "Spring Boot", "REST APIs", "SOAP", "Apache Camel"],
+        items: ["Java", "Spring Boot", "REST APIs", "SOAP", "Apache Camel", "RabbitMQ"],
       },
       {
         name: "Data & ORM",
