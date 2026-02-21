@@ -207,7 +207,7 @@ Updated existing redirect rule from `.com` to `.dev`:
 - [x] `robots.txt` accessible at `https://thedariusz.dev/robots.txt` — includes Cloudflare-managed AI bot blocks + custom `Allow: /` and sitemap reference
 - [x] Sitemap accessible at `https://thedariusz.dev/sitemap.xml` — correct `<loc>` pointing to `https://thedariusz.dev`
 - [x] No duplicate content issues — all domains (`.com`, `.pl`, `www.*`) 301 redirect to `.dev`
-- [ ] Google Search Console: submit `thedariusz.dev` for indexing
+- [x] Google Search Console: `thedariusz.dev` indexed and appearing in search results
 
 ---
 
@@ -235,8 +235,8 @@ No additional setup needed. This is built into Cloudflare Pages.
 | 8 | Update codebase URLs to `.dev` (index.html, robots, sitemap) | Codebase + push | ✅ Done |
 | 9 | Reconfigure `thedariusz.com` as redirect → `.dev` | Cloudflare | ✅ Done |
 | 10 | Update `thedariusz.pl` redirect → `.dev` | Cloudflare Rules | ✅ Done |
-| 11 | Run full verification checklist | Browser | ⏳ Mobile perf optimization deferred, Google Search Console pending |
-| 12 | Submit `thedariusz.dev` to Google Search Console | Google Search Console | ⏳ Pending |
+| 11 | Run full verification checklist | Browser | ✅ Done (mobile perf 84, desktop 96+) |
+| 12 | Submit `thedariusz.dev` to Google Search Console | Google Search Console | ✅ Done |
 
 ---
 
