@@ -20,7 +20,7 @@ Deploy the landing page as a static site on **Cloudflare Pages**, with three dom
 - ✅ `thedariusz.pl` + `www` → 301 redirect to `thedariusz.dev`
 - ✅ OG meta tags, canonical URL, robots.txt, sitemap.xml all reference `thedariusz.dev`
 - ✅ All three domains on Cloudflare DNS
-- ⚠️ `www.thedariusz.com` — DNS propagating (AAAA record added, awaiting resolution)
+- ✅ `www.thedariusz.com` — DNS propagated, 301 redirect working
 - ⚠️ Build output has a 544 KB JS chunk (works fine, optimization can come later)
 
 ---
@@ -124,9 +124,9 @@ The `.dev` TLD **requires HTTPS** (it's HSTS-preloaded). Cloudflare handles this
 
 - [x] `https://thedariusz.dev` loads the site correctly
 - [x] `https://www.thedariusz.dev` → redirects to `https://thedariusz.dev`
-- [ ] All sections render properly (manual check)
-- [ ] Contact form works (manual check)
-- [ ] CV downloads work (manual check)
+- [x] All sections render properly (manual check)
+- [x] Contact form works (manual check)
+- [x] CV downloads work (manual check)
 
 ---
 
@@ -152,7 +152,7 @@ Updated all references from `thedariusz.com` to `thedariusz.dev`:
 - 301 permanent, preserve query string
 
 ### 9d. ✅ Dummy AAAA `100::` record added for apex (auto-created during rule deployment)
-### 9e. ⚠️ AAAA `100::` record for `www` added — DNS propagating
+### 9e. ✅ AAAA `100::` record for `www` — DNS propagated
 
 > `n8n.thedariusz.com` unaffected — redirect rule only matches exact hostnames.
 
@@ -173,27 +173,43 @@ Updated existing redirect rule from `.com` to `.dev`:
 - [x] `https://thedariusz.dev` — site loads correctly (HTTP 200)
 - [x] `https://www.thedariusz.dev` → 301 to `https://thedariusz.dev`
 - [x] `https://thedariusz.com` → 301 to `https://thedariusz.dev`
-- [ ] `https://www.thedariusz.com` → `https://thedariusz.dev` (⚠️ DNS propagating)
+- [x] `https://www.thedariusz.com` → 301 to `https://thedariusz.dev` ✅ DNS propagated
 - [x] `http://thedariusz.com` → 301 to `https://thedariusz.dev`
 - [x] `https://thedariusz.pl` → 301 to `https://thedariusz.dev`
 - [x] `https://www.thedariusz.pl` → 301 to `https://thedariusz.dev`
 - [x] `https://n8n.thedariusz.com` — still works (HTTP 200)
-- [ ] Contact form submits successfully (manual check)
-- [ ] CV downloads work (both EN and PL) (manual check)
-- [ ] Social links open correct profiles (manual check)
-- [ ] OG image shows up when sharing link on LinkedIn/X (use [opengraph.xyz](https://www.opengraph.xyz/) to test)
-- [ ] Mobile responsive — check on real phone
+- [x] Contact form submits successfully
+- [x] CV downloads work (both EN and PL)
+- [x] Social links open correct profiles
+- [x] OG image shows up when sharing link — ⚠️ works but needs improvement:
+  - Missing a call-to-action in the image
+  - Title is short (39 chars, optimal: 50–60)
+- [x] Mobile responsive — checked on real phone
 
 ### Performance checks
-- [ ] Run [PageSpeed Insights](https://pagespeed.web.dev/) on `thedariusz.dev`
-- [ ] Target: 90+ on all Lighthouse categories
-- [ ] Check that Cloudflare is caching static assets (inspect response headers for `cf-cache-status: HIT`)
+- [x] Run [PageSpeed Insights](https://pagespeed.web.dev/) on `thedariusz.dev` (Feb 21, 2026)
+  - Mobile: [results](https://pagespeed.web.dev/analysis/https-thedariusz-dev/brnrbz7nmg?form_factor=mobile)
+  - Desktop: [results](https://pagespeed.web.dev/analysis/https-thedariusz-dev/brnrbz7nmg?form_factor=desktop)
+- [x] Lighthouse scores:
+
+  | Category | Mobile | Desktop |
+  |---|---|---|
+  | Performance | ⚠️ 70 | ✅ 96 |
+  | Accessibility | ✅ 100 | ✅ 100 |
+  | Best Practices | ✅ 100 | ✅ 100 |
+  | SEO | ✅ 92 | ✅ 92 |
+
+  Desktop hits 90+ on all categories. Mobile Performance is 70 due to:
+  - LCP 6.5s / FCP 3.3s — image delivery (~574 KiB savings) and render-blocking requests (~2,090 ms savings)
+  - 544 KB JS chunk is the main contributor
+  - ⚠️ SEO 92: Lighthouse flags robots.txt as invalid — caused by Cloudflare-managed `Content-Signal` directives, not an actual issue
+- [x] Cloudflare is caching static assets — confirmed `cf-cache-status: REVALIDATED` on JS assets; HTML returns `DYNAMIC` (expected)
 
 ### SEO checks
-- [ ] Canonical URL resolves correctly (`https://thedariusz.dev`)
-- [ ] `robots.txt` accessible at `https://thedariusz.dev/robots.txt`
-- [ ] Sitemap accessible at `https://thedariusz.dev/sitemap.xml`
-- [ ] No duplicate content issues (all domains redirect to .dev)
+- [x] Canonical URL resolves correctly (`https://thedariusz.dev`)
+- [x] `robots.txt` accessible at `https://thedariusz.dev/robots.txt` — includes Cloudflare-managed AI bot blocks + custom `Allow: /` and sitemap reference
+- [x] Sitemap accessible at `https://thedariusz.dev/sitemap.xml` — correct `<loc>` pointing to `https://thedariusz.dev`
+- [x] No duplicate content issues — all domains (`.com`, `.pl`, `www.*`) 301 redirect to `.dev`
 - [ ] Google Search Console: submit `thedariusz.dev` for indexing
 
 ---
@@ -222,8 +238,8 @@ No additional setup needed. This is built into Cloudflare Pages.
 | 8 | Update codebase URLs to `.dev` (index.html, robots, sitemap) | Codebase + push | ✅ Done |
 | 9 | Reconfigure `thedariusz.com` as redirect → `.dev` | Cloudflare | ✅ Done |
 | 10 | Update `thedariusz.pl` redirect → `.dev` | Cloudflare Rules | ✅ Done |
-| 11 | Run full verification checklist | Browser | ⏳ Mostly done (`www.thedariusz.com` DNS propagating) |
-| 12 | Submit `thedariusz.dev` to Google Search Console | Google Search Console | |
+| 11 | Run full verification checklist | Browser | ⏳ OG image improvements + mobile perf optimization needed, Google Search Console pending |
+| 12 | Submit `thedariusz.dev` to Google Search Console | Google Search Console | ⏳ Pending |
 
 ---
 
