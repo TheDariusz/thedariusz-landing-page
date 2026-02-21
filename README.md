@@ -1,73 +1,62 @@
-# Welcome to your Lovable project
+# thedariusz.dev
 
-## Project info
+Personal landing page for Dariusz — software engineer portfolio site.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**Live:** [thedariusz.dev](https://thedariusz.dev)
 
-## How can I edit this code?
+## Tech Stack
 
-There are several ways of editing your application.
+- React 19, TypeScript 5.9, Vite 7
+- Tailwind CSS 4, shadcn/ui
+- Motion v12 (animations)
+- Zod 4 (form validation)
+- Vitest 4 + Testing Library
 
-**Use Lovable**
+## Development
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+Requires Node.js 22+.
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+npm install
+npm run dev          # Dev server on port 8080
+npm run build        # Production build
+npm run lint         # ESLint
+npm run test         # Run tests
 ```
 
-**Edit a file directly in GitHub**
+## Project Structure
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```
+src/
+├── components/      # Page sections and shared components
+│   └── ui/          # shadcn/ui primitives (don't edit manually)
+├── data/
+│   └── siteData.ts  # All site content lives here
+├── hooks/           # Custom React hooks
+├── lib/             # Utilities
+└── test/            # Test setup
+public/              # Static assets (OG image, CV files, robots.txt, sitemap.xml)
+```
 
-**Use GitHub Codespaces**
+All site copy, skills, stats, and links are centralized in `src/data/siteData.ts` — edit content there, not in components.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Contact Form
 
-## What technologies are used for this project?
+Form submissions are sent to an **n8n** workflow (self-hosted on Hetzner), which persists the data into a **Supabase** database.
 
-This project is built with:
+## Deployment
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Hosted on **Cloudflare Pages** with automatic deploys:
 
-## How can I deploy this project?
+- Push to `main` → production build and deploy
+- Push to other branches → preview deployment
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+### Domains
 
-## Can I connect a custom domain to my Lovable project?
+| Domain | Behavior |
+|---|---|
+| [thedariusz.dev](https://thedariusz.dev) | Primary domain |
+| thedariusz.com | 301 redirect → thedariusz.dev |
+| thedariusz.pl | 301 redirect → thedariusz.dev |
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+All DNS managed on Cloudflare.
