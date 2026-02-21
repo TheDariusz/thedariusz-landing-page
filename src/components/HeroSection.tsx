@@ -3,7 +3,7 @@ import { siteData } from "@/data/siteData";
 import { Button } from "@/components/ui/button";
 import CVDownloadButton from "@/components/CVDownloadButton";
 import { ArrowDown, ChevronDown } from "lucide-react";
-import profilePhoto from "@/assets/profile-photo.png";
+import profilePhoto from "@/assets/profile-photo.webp";
 
 const HeroSection = () => {
   const handleScroll = (href: string) => {
