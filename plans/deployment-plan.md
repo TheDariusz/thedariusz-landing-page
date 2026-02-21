@@ -181,9 +181,7 @@ Updated existing redirect rule from `.com` to `.dev`:
 - [x] Contact form submits successfully
 - [x] CV downloads work (both EN and PL)
 - [x] Social links open correct profiles
-- [x] OG image shows up when sharing link — ⚠️ works but needs improvement:
-  - Missing a call-to-action in the image
-  - Title is short (39 chars, optimal: 50–60)
+- [x] OG image shows up when sharing link — ✅ CTA added to image, title updated to 57 chars
 - [x] Mobile responsive — checked on real phone
 
 ### Performance checks
@@ -238,7 +236,7 @@ No additional setup needed. This is built into Cloudflare Pages.
 | 8 | Update codebase URLs to `.dev` (index.html, robots, sitemap) | Codebase + push | ✅ Done |
 | 9 | Reconfigure `thedariusz.com` as redirect → `.dev` | Cloudflare | ✅ Done |
 | 10 | Update `thedariusz.pl` redirect → `.dev` | Cloudflare Rules | ✅ Done |
-| 11 | Run full verification checklist | Browser | ⏳ OG image improvements + mobile perf optimization needed, Google Search Console pending |
+| 11 | Run full verification checklist | Browser | ⏳ Mobile perf optimization deferred, Google Search Console pending |
 | 12 | Submit `thedariusz.dev` to Google Search Console | Google Search Console | ⏳ Pending |
 
 ---
