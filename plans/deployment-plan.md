@@ -192,14 +192,13 @@ Updated existing redirect rule from `.com` to `.dev`:
 
   | Category | Mobile | Desktop |
   |---|---|---|
-  | Performance | ⚠️ 70 | ✅ 96 |
+  | Performance | ⚠️ 84 (was 70) | ✅ 96 |
   | Accessibility | ✅ 100 | ✅ 100 |
   | Best Practices | ✅ 100 | ✅ 100 |
   | SEO | ✅ 92 | ✅ 92 |
 
-  Desktop hits 90+ on all categories. Mobile Performance is 70 due to:
-  - LCP 6.5s / FCP 3.3s — image delivery (~574 KiB savings) and render-blocking requests (~2,090 ms savings)
-  - 544 KB JS chunk is the main contributor
+  Desktop hits 90+ on all categories. Mobile Performance improved 70→84 after WebP conversion and font fix.
+  Remaining gap to 90+ is the 544 KB JS chunk — code splitting possible but diminishing returns for a single-page site.
   - ⚠️ SEO 92: Lighthouse flags robots.txt as invalid — caused by Cloudflare-managed `Content-Signal` directives, not an actual issue
 - [x] Cloudflare is caching static assets — confirmed `cf-cache-status: REVALIDATED` on JS assets; HTML returns `DYNAMIC` (expected)
 
