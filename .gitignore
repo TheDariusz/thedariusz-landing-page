@@ -32,4 +32,4 @@ coverage/
 *.njsproj
 *.sln
 *.sw?
-docs/react19-my-help.md
+docs/*.*
