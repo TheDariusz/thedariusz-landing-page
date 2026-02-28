@@ -35,8 +35,10 @@ describe("siteData", () => {
     });
   });
 
-  it("has CV links for both languages", () => {
-    expect(siteData.cvLinks.en).toMatch(/\.pdf$/);
-    expect(siteData.cvLinks.pl).toMatch(/\.pdf$/);
+  it("has CV links for both languages and formats", () => {
+    expect(siteData.cvLinks.en.pdf).toMatch(/\.pdf$/);
+    expect(siteData.cvLinks.en.md).toMatch(/\.md$/);
+    expect(siteData.cvLinks.pl.pdf).toMatch(/\.pdf$/);
+    expect(siteData.cvLinks.pl.md).toMatch(/\.md$/);
   });
 });

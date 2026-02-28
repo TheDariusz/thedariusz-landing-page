@@ -7,8 +7,14 @@ export const siteData = {
   },
   email: "thedariusz@gmail.com",
   cvLinks: {
-    en: "/Dariusz_Szczepanski_resume-en.pdf",
-    pl: "/Dariusz_Szczepanski_resume-pl.pdf",
+    en: {
+      pdf: "/Dariusz_Szczepanski_resume-en.pdf",
+      md: "/Dariusz_Szczepanski_resume-en.md",
+    },
+    pl: {
+      pdf: "/Dariusz_Szczepanski_resume-pl.pdf",
+      md: "/Dariusz_Szczepanski_resume-pl.md",
+    },
   },
   socialLinks: {
     github: "https://github.com/thedariusz",
