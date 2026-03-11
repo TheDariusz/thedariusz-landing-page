@@ -11,6 +11,7 @@ npm run build:dev    # Development build
 npm run lint         # ESLint
 npm run test         # Run tests once (vitest)
 npm run test:watch   # Run tests in watch mode
+npm run typecheck    # TypeScript type check (tsc --build)
 ```
 
 ## PRD & Design Docs
@@ -38,7 +39,11 @@ Vitest with jsdom environment and `@testing-library/react`. Test setup in `src/t
 
 ### TypeScript
 
-Strict mode is off. `noImplicitAny` and `strictNullChecks` are disabled.
+Strict mode is off. `noImplicitAny` is disabled but `strictNullChecks` is enabled.
+
+### CI
+
+GitHub Actions workflow (`.github/workflows/ci.yml`) runs on push to `main` and PRs targeting `main`. Steps: lint → typecheck → test → build. Node version read from `.nvmrc` (currently 22).
 
 # Commits
 - Do not add Co-Authored-By or any AI footer to commit messages
