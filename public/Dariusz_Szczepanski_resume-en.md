@@ -89,3 +89,7 @@ Active practitioner of AI-augmented software development, leveraging AI as a too
 
 - **Polish** – Native
 - **English** – B1 (Intermediate)
+
+---
+
+*I consent to the processing of my personal data for the purposes of recruitment, in accordance with Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 (GDPR).*

@@ -66,7 +66,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMobileOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-lg border-b border-border">
+        <div data-testid="mobile-menu" className="md:hidden bg-background/95 backdrop-blur-lg border-b border-border">
           <nav className="container mx-auto px-4 py-6 flex flex-col gap-4" aria-label="Mobile navigation">
             {siteData.navLinks.map((link) => (
               <button

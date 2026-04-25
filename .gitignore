@@ -34,3 +34,9 @@ coverage/
 *.sln
 *.sw?
 docs/*.*
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
