@@ -49,7 +49,7 @@ Software Engineer with 4+ years of hands-on backend development experience and 1
 
 ## Technical Skills
 
-- **Backend Development:** Java 8–24, Spring Boot 3, Hibernate/JPA, JOOQ, JDBC, REST APIs, SOAP, Apache Camel, RabbitMQ, OAuth2, JSP, Thymeleaf
+- **Backend Development:** Java 8–25, Spring Boot 3/4, Hibernate/JPA, JOOQ, JDBC, REST APIs, SOAP, Apache Camel, RabbitMQ, OAuth2, Thymeleaf, JavaScript
 - **Databases:** MySQL, MariaDB, PostgreSQL, SQL
 - **Data Analysis & Reporting:** Python, SQL, PowerBI, Dashboards, KPI Monitoring
 - **DevOps & Tools:** Docker, Git, GitHub Actions, Maven, JIRA, Confluence, JetBrains IDEs

@@ -49,7 +49,7 @@ Inżynier oprogramowania z ponad 4-letnim doświadczeniem w rozwoju backendów i
 
 ## Umiejętności techniczne
 
-- **Rozwój Backend:** Java 8–24, Spring Boot 3, Hibernate/JPA, JOOQ, JDBC, REST API, SOAP, Apache Camel, RabbitMQ, OAuth2, JSP, Thymeleaf
+- **Rozwój Backend:** Java 8–25, Spring Boot 3/4, Hibernate/JPA, JOOQ, JDBC, REST API, SOAP, Apache Camel, RabbitMQ, OAuth2, Thymeleaf, JavaScript
 - **Bazy danych:** MySQL, MariaDB, PostgreSQL, SQL
 - **Analiza danych i raportowanie:** Python, SQL, PowerBI, Dashboardy, Monitoring KPI
 - **DevOps i narzędzia:** Docker, Git, GitHub Actions, Maven, JIRA, Confluence, JetBrains IDE
