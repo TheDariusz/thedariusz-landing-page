@@ -42,7 +42,7 @@ All site copy, skills, stats, and links are centralized in `src/data/siteData.ts
 
 ## Contact Form
 
-Form submissions are sent to an **n8n** workflow (self-hosted on Hetzner), which persists the data into a **Supabase** database.
+Form submissions are sent to an **n8n** workflow (self-hosted on Hetzner), which forwards them as an **email notification**. There is no database — submissions are rare, and the inbox serves as the archive.
 
 ## Deployment
 

@@ -53,7 +53,7 @@ A clean, modern, single-page personal landing page that professionally presents 
 
 ### Phase 2 — Blog & Interactivity
 - **Goal:** Content platform for developer audience
-- **Stack addition:** Supabase (user interactions, form storage)
+- **Stack addition:** backend for comments/newsletter chosen when needed (contact form stays email-only — see Section 6)
 - **Additions:** Blog at `yourdomain.com/blog` (Astro content collections), comments, newsletter
 
 ---
@@ -163,12 +163,12 @@ Displayed as categorized tag/badge groups (NO proficiency bars):
 [User fills form] → [Zod 4 client-side validation] → [POST to n8n webhook on Hetzner]
                                                                ↓
                                                       [n8n workflow]
-                                                          ├── Send email notification to user
-                                                          ├── (Optional) Store in Google Sheets / JSON
-                                                          └── (Phase 2) Store in Supabase
+                                                          └── Send email notification to site owner
 ```
 
 **Current webhook endpoint:** `https://n8n.thedariusz.com/webhook/972def4a-2294-400f-a8f4-72df7db8e442`
+
+**Persistence decision (July 2026):** submissions are intentionally NOT stored in a database. An earlier iteration wrote each submission to a Supabase table, but with rare submissions the free-tier project kept getting paused for inactivity, and the email notification already contains the full submission — the inbox is the searchable archive. Revisit only if submission volume grows enough to need structured storage (e.g. a Google Sheets append node in the same n8n workflow).
 
 ---
 
@@ -214,7 +214,7 @@ Displayed as categorized tag/badge groups (NO proficiency bars):
 - Blog
 - Dark/light theme toggle
 - Multi-language (i18n) content
-- Supabase integration
+- Database persistence for form submissions (tried with Supabase, deliberately dropped — see Section 6)
 - User authentication
 - Newsletter signup
 - Comments system
