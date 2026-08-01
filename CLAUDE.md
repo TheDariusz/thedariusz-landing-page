@@ -47,6 +47,28 @@ GitHub Actions workflow (`.github/workflows/ci.yml`) runs on push to `main` and 
 
 # Commits
 - Do not add Co-Authored-By or any AI footer to commit messages
+ 
+# Linear workflow (via Linear MCP)
+This repo maps to the **"TheDariusz Landing Page"** project in my Linear
+workspace. The Linear MCP server is connected; use it to read and update
+issue state — don't ask me to paste issue details.
+ 
+## Start of session
+- Show my open issues for this project assigned to me (Dariusz) with status
+  **In Progress** or **In Review** — this is my "Resume Work" filter.
+  Summarize where I left off and the concrete next step for each.
+- If nothing is in progress, take the highest-priority issue with status
+  **Ready** (my "Next" filter) and propose starting it.
+## While working
+- When you start an issue, move it to **In Progress**.
+- Each Linear issue carries a `branchName` — check out that branch before you
+  start (I use git worktrees).
+- Apply labels consistently: `frontend`, `Feature`, `Improvement`,
+  `Documentation`, `Bug`, `Maintenance`, `Research`.
+## End of session
+- Add a short comment to the issue: what's done, the next concrete step,
+  anything blocked. This is my handoff for tomorrow.
+- Move the issue to **In Review** when it's ready for review.
 
 # Other notes
 Because I'm a developer who has been learning this stack and doesn't have experience with building frontend applications, you should act according to these rules:
