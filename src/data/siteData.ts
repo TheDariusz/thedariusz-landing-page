@@ -67,7 +67,7 @@ export const siteData = {
     { value: "4+", label: "Years Experience" },
     { value: "10+", label: "Enterprise Projects" },
     { value: "Java & Spring Boot", label: "Core Expertise" },
-    { value: String(projects.length), label: "Apps Shipped" },
+    { value: "AI-Driven", label: "Development Approach" },
   ],
   portfolio: {
     heading: "Selected projects",
@@ -78,7 +78,7 @@ export const siteData = {
     professional: [
       "I've spent four years as a software engineer building scalable backend systems in Java and Spring Boot. Most of that time goes into designing REST APIs, implementing complex business logic, and integrating the enterprise systems that run critical operations.",
       "I have a background in business analysis, so I start by understanding the business process before I write code. I work between stakeholders and the technical side, turning what they need into clean, maintainable code without losing sight of the overall goal.",
-      "I use AI a lot and follow spec-driven development, which helps me reach business goals faster and with fewer resources. I still review every output myself and back it with tests and validation.",
+      "I'm an active AI user and follow spec-driven development, which helps me reach business goals faster and with fewer resources. I still review every output myself and back it with tests and validation.",
     ],
     beyondWork:
       "Outside of engineering, I'm fascinated by astronomy and physics, which remind me how much exists beyond code. I train regularly and keep trying new technologies and automation tools, because I believe continuous learning matters as much for personal growth as for work.",
