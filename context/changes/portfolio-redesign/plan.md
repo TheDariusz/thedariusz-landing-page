@@ -490,15 +490,15 @@ Contact keeps its two-column layout, and the contact details are shown as a mono
 
 #### Automated
 
-- [x] 4.1 Lint passes
-- [x] 4.2 Type checking passes
-- [x] 4.3 Unit tests pass
-- [x] 4.4 Build passes
-- [x] 4.5 E2E tests pass
+- [x] 4.1 Lint passes — fbfa2ff
+- [x] 4.2 Type checking passes — fbfa2ff
+- [x] 4.3 Unit tests pass — fbfa2ff
+- [x] 4.4 Build passes — fbfa2ff
+- [x] 4.5 E2E tests pass — fbfa2ff
 
 #### Manual
 
-- [x] 4.6 All sections share the same spacing rhythm and heading style
-- [x] 4.7 Lighthouse 90+ in all categories on the production build
-- [x] 4.8 Contact form submit, error and success toasts still work
-- [x] 4.9 PRD and CLAUDE.md match the shipped page
+- [x] 4.6 All sections share the same spacing rhythm and heading style — fbfa2ff
+- [x] 4.7 Lighthouse 90+ in all categories on the production build — fbfa2ff
+- [x] 4.8 Contact form submit, error and success toasts still work — fbfa2ff
+- [x] 4.9 PRD and CLAUDE.md match the shipped page — fbfa2ff
