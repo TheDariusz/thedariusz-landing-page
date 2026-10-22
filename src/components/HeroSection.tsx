@@ -74,7 +74,7 @@ const HeroSection = () => {
           <Button
             size="lg"
             onClick={() => handleScroll("#contact")}
-            className="bg-primary text-primary-foreground hover:bg-primary/90 px-8"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 rounded-full"
           >
             <ArrowDown className="w-4 h-4 mr-2" />
             {siteData.hero.ctaPrimary}

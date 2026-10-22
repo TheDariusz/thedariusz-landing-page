@@ -6,7 +6,7 @@ const AboutSection = () => {
     <section id="about" className="py-24 px-4" aria-label="About Me">
       <div className="container mx-auto max-w-3xl">
         <FadeInSection>
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-foreground accent-underline pb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-foreground">
             {siteData.about.heading}
           </h2>
         </FadeInSection>

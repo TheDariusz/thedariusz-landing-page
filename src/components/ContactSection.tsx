@@ -72,7 +72,7 @@ const ContactSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-foreground accent-underline pb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-foreground">
             {siteData.contact.heading}
           </h2>
         </motion.div>
@@ -99,11 +99,11 @@ const ContactSection = () => {
                 href={`mailto:${siteData.email}`}
                 className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group"
               >
-                <Mail className="w-5 h-5 text-primary" />
+                <Mail className="w-5 h-5 text-muted-foreground" />
                 <span className="group-hover:underline underline-offset-4">{siteData.email}</span>
               </a>
               <div className="flex items-center gap-3 text-muted-foreground">
-                <MapPin className="w-5 h-5 text-primary" />
+                <MapPin className="w-5 h-5 text-muted-foreground" />
                 <span>{siteData.contact.location}</span>
               </div>
             </div>
@@ -135,7 +135,7 @@ const ContactSection = () => {
                 className="bg-secondary/50 border-border focus:border-primary/50 text-foreground placeholder:text-muted-foreground"
                 required
               />
-              {errors.name && <p className="text-sm text-primary mt-1">{errors.name}</p>}
+              {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
             </div>
             <div>
               <Input
@@ -148,7 +148,7 @@ const ContactSection = () => {
                 className="bg-secondary/50 border-border focus:border-primary/50 text-foreground placeholder:text-muted-foreground"
                 required
               />
-              {errors.email && <p className="text-sm text-primary mt-1">{errors.email}</p>}
+              {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
             </div>
             <div>
               <Textarea
@@ -161,12 +161,12 @@ const ContactSection = () => {
                 className="bg-secondary/50 border-border focus:border-primary/50 text-foreground placeholder:text-muted-foreground resize-none"
                 required
               />
-              {errors.message && <p className="text-sm text-primary mt-1">{errors.message}</p>}
+              {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
             </div>
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="bg-primary text-primary-foreground hover:bg-primary/90 w-full px-8"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 w-full px-8 rounded-full"
             >
               {isSubmitting ? (
                 <>

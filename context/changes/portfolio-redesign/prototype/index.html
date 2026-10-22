@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en" data-canvas="black" data-glow="off">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio Redesign Prototype</title>
+<!-- Throwaway visual prototype for context/changes/portfolio-redesign/plan.md. Not part of the app build. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.11"></script>
+<!-- CSS kept in text/plain so the project's Vite/PostCSS doesn't process it; injected for the Tailwind browser build -->
+<script type="text/plain" id="tw-src">
+  @theme {
+    --font-sans: "Inter", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+    --color-background: #0a0a0a;
+    --color-card: #141414;
+    --color-border: #1f1f1f;
+    --color-foreground: #ededed;
+    --color-muted: #a1a1a1;
+    --color-subtle: #8a8a8a;
+    --color-accent: #e11d48;
+    --radius-media: 24px;
+  }
+  /* Variant: charcoal canvas (lighter, slightly cool) */
+  html[data-canvas="charcoal"] {
+    --color-background: #131316;
+    --color-card: #1c1c20;
+    --color-border: #2a2a2f;
+  }
+  /* Variant: subtle hero glow */
+  .hero-glow { display: none; }
+  html[data-glow="on"] .hero-glow { display: block; }
+
+  body { @apply bg-background text-foreground font-sans antialiased; transition: background-color .3s; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  .eyebrow { @apply font-mono text-xs uppercase tracking-[0.12em] text-subtle; }
+  .h2 { @apply text-3xl md:text-5xl font-semibold tracking-[-0.03em]; }
+  .section { @apply py-24 md:py-32 lg:py-40 border-t border-border; }
+  .btn-primary { @apply inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition hover:bg-accent/90 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent; }
+  .btn-outline { @apply inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium text-foreground transition hover:bg-card hover:border-subtle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent cursor-pointer; }
+  .chip { @apply rounded-full border border-border px-3 py-1.5 text-sm text-muted transition-colors hover:text-foreground hover:border-subtle; }
+  .field { @apply w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-subtle focus:outline-2 focus:outline-accent; }
+  .icon-link { @apply text-muted hover:text-foreground transition-colors; }
+  .ext-link { @apply font-mono text-sm text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors; }
+  .ext-link .arrow { display: inline-block; transition: transform .2s; }
+  .ext-link:hover .arrow { transform: translate(2px, -2px); }
+
+  /* Screenshot card hover */
+  .shot { @apply block bg-card border border-border rounded-[var(--radius-media)] p-2 md:p-3 overflow-hidden transition-colors hover:border-subtle; }
+  .shot img { transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+  .shot:hover img { transform: scale(1.025); }
+
+  /* CV dropdown */
+  details.cv summary::-webkit-details-marker { display: none; }
+  details.cv summary { list-style: none; }
+  .cv-menu { @apply absolute right-0 mt-2 min-w-[180px] rounded-xl border border-border bg-card p-1.5 shadow-2xl z-50 text-sm; }
+  .cv-menu .label { @apply px-3 pt-2 pb-1 font-mono text-[11px] uppercase tracking-wider text-subtle; }
+  .cv-menu a { @apply block rounded-lg px-3 py-2 text-foreground hover:bg-background; }
+
+  /* Scroll reveal, as the real app's FadeInSection does */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease-out, transform .7s ease-out; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .shot img, .ext-link .arrow { transition: none; }
+  }
+</script>
+<script>
+  const tw = document.createElement("style");
+  tw.type = "text/tailwindcss";
+  tw.textContent = document.getElementById("tw-src").textContent;
+  document.head.appendChild(tw);
+</script>
+</head>
+<body>
+
+<!-- Reusable bits rendered by the small script at the bottom -->
+<template id="social-icons">
+  <a href="https://github.com/thedariusz" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="icon-link">
+    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 3.5c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+  </a>
+  <a href="https://www.linkedin.com/in/dariusz-szczepanski-dev" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="icon-link">
+    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+  </a>
+  <a href="https://x.com/thedariusz_dev" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" class="icon-link">
+    <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+  </a>
+</template>
+
+<template id="cv-dropdown">
+  <details class="cv relative">
+    <summary class="btn-outline">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+      Download CV
+    </summary>
+    <div class="cv-menu" role="menu">
+      <p class="label">English</p>
+      <a role="menuitem" href="/Dariusz_Szczepanski_resume-en.pdf" download>PDF</a>
+      <a role="menuitem" href="/Dariusz_Szczepanski_resume-en.md" download class="!text-muted">Markdown</a>
+      <div class="my-1 border-t border-border"></div>
+      <p class="label">Polski</p>
+      <a role="menuitem" href="/Dariusz_Szczepanski_resume-pl.pdf" download>PDF</a>
+      <a role="menuitem" href="/Dariusz_Szczepanski_resume-pl.md" download class="!text-muted">Markdown</a>
+    </div>
+  </details>
+</template>
+
+<!-- Header -->
+<header class="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+  <div class="mx-auto max-w-6xl px-4 md:px-6 py-4 flex items-center justify-between">
+    <a href="#" class="flex items-center text-lg tracking-tight" aria-label="Home">
+      <span class="text-muted font-light">dev</span>
+      <span class="inline-block w-[7px] h-[7px] bg-accent rounded-[1px] mx-[3px] self-end mb-[5px]"></span>
+      <span class="font-semibold">TheDariusz</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm text-muted" aria-label="Main navigation">
+      <a href="#projects" class="hover:text-foreground transition-colors">Projects</a>
+      <a href="#about" class="hover:text-foreground transition-colors">About</a>
+      <a href="#skills" class="hover:text-foreground transition-colors">Skills</a>
+      <a href="#contact" class="hover:text-foreground transition-colors">Contact</a>
+    </nav>
+    <div class="hidden md:flex items-center gap-4">
+      <div class="flex items-center gap-4" data-slot="social-icons"></div>
+      <div class="ml-2 [&_summary]:!px-4 [&_summary]:!py-2 [&_summary]:!text-xs" data-slot="cv-dropdown"></div>
+    </div>
+    <button id="menu-btn" class="md:hidden p-1 text-foreground" aria-label="Open menu" aria-expanded="false">
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" x2="20" y1="7" y2="7"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="17" y2="17"/></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-background">
+    <nav class="mx-auto max-w-6xl px-4 py-6 flex flex-col gap-1 text-lg" aria-label="Mobile navigation">
+      <a href="#projects" class="py-2">Projects</a>
+      <a href="#about" class="py-2">About</a>
+      <a href="#skills" class="py-2">Skills</a>
+      <a href="#contact" class="py-2">Contact</a>
+      <div class="flex items-center gap-5 pt-5 mt-3 border-t border-border" data-slot="social-icons"></div>
+      <div class="pt-4" data-slot="cv-dropdown"></div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Hero: split, large portrait on the right -->
+  <section class="relative z-10" aria-label="Introduction">
+    <div class="hero-glow pointer-events-none absolute inset-0 overflow-hidden">
+      <div class="absolute -top-40 right-[-10%] w-[720px] h-[720px] rounded-full"
+           style="background: radial-gradient(closest-side, rgb(225 29 72 / .14), transparent)"></div>
+    </div>
+    <div class="relative mx-auto max-w-6xl px-4 md:px-6 pt-16 pb-24 md:pt-28 md:pb-32 grid md:grid-cols-12 gap-10 md:gap-12 items-center">
+      <div class="md:col-span-7 md:order-1 order-2">
+        <p class="eyebrow mb-4 reveal">Hello, I'm</p>
+        <h1 class="text-5xl md:text-7xl lg:text-[88px] font-semibold tracking-[-0.04em] leading-[0.95] mb-6 reveal" style="transition-delay:.08s">Dariusz Szczepański</h1>
+        <p class="max-w-xl text-lg md:text-xl text-muted leading-relaxed mb-10 reveal" style="transition-delay:.16s">Software Engineer | Backend &amp; Integration Specialist</p>
+        <div class="flex flex-wrap gap-3 reveal" style="transition-delay:.24s">
+          <a href="#contact" class="btn-primary">Get in Touch</a>
+          <div data-slot="cv-dropdown"></div>
+        </div>
+      </div>
+      <div class="md:col-span-5 md:order-2 order-1 reveal">
+        <img src="../../../../src/assets/profile-photo.webp" width="480" height="480" alt="Portrait of Dariusz Szczepański"
+             class="w-40 h-40 md:w-full md:h-auto md:max-w-[340px] md:ml-auto aspect-square object-cover rounded-full md:rounded-[var(--radius-media)] border border-border">
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-t border-border" aria-label="Key highlights">
+    <div class="mx-auto max-w-6xl px-4 md:px-6 grid grid-cols-2 md:grid-cols-4">
+      <div class="py-8 md:py-10 pr-4 reveal"><p class="text-2xl md:text-3xl font-semibold tracking-tight">4+</p><p class="eyebrow mt-2">Years Experience</p></div>
+      <div class="py-8 md:py-10 pr-4 md:border-l md:border-border md:pl-6 reveal" style="transition-delay:.08s"><p class="text-2xl md:text-3xl font-semibold tracking-tight">10+</p><p class="eyebrow mt-2">Enterprise Projects</p></div>
+      <div class="py-8 md:py-10 pr-4 border-t md:border-t-0 md:border-l border-border md:pl-6 reveal" style="transition-delay:.16s"><p class="text-2xl md:text-3xl font-semibold tracking-tight">Java &amp; Spring</p><p class="eyebrow mt-2">Core Expertise</p></div>
+      <div class="py-8 md:py-10 pr-4 border-t md:border-t-0 md:border-l border-border md:pl-6 reveal" style="transition-delay:.24s"><p class="text-2xl md:text-3xl font-semibold tracking-tight">AI-Driven</p><p class="eyebrow mt-2">Development Approach</p></div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="section" aria-label="Projects">
+    <div class="mx-auto max-w-6xl px-4 md:px-6">
+      <p class="eyebrow mb-4 reveal">Projects</p>
+      <h2 class="h2 mb-16 md:mb-24 reveal">Selected projects</h2>
+
+      <div class="space-y-24 md:space-y-32">
+        <article class="grid md:grid-cols-12 gap-8 md:gap-12 items-center reveal">
+          <a href="https://ai-cards.app" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true" class="shot md:col-span-7">
+            <img src="../refs/ai-cards.png" width="1600" height="900" loading="lazy" alt="" class="w-full aspect-[16/10] object-cover object-top rounded-[calc(var(--radius-media)-8px)]">
+          </a>
+          <div class="md:col-span-5">
+            <p class="eyebrow mb-4">01 / 03</p>
+            <h3 class="text-2xl md:text-3xl font-semibold tracking-[-0.02em] mb-4">AI Cards</h3>
+            <p class="text-muted leading-relaxed mb-6">English flashcards for Polish speakers. Type a word you heard; AI builds the card (meaning, example sentence, audio) and a three-day routine takes it from first read to active recall.</p>
+            <a href="https://ai-cards.app" target="_blank" rel="noopener noreferrer" class="ext-link">ai-cards.app <span class="arrow">↗</span></a>
+          </div>
+        </article>
+
+        <article class="grid md:grid-cols-12 gap-8 md:gap-12 items-center reveal">
+          <a href="https://2doai.app" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true" class="shot md:col-span-7 md:order-2">
+            <img src="../refs/2doai.png" width="1600" height="900" loading="lazy" alt="" class="w-full aspect-[16/10] object-cover object-top rounded-[calc(var(--radius-media)-8px)]">
+          </a>
+          <div class="md:col-span-5 md:order-1">
+            <p class="eyebrow mb-4">02 / 03</p>
+            <h3 class="text-2xl md:text-3xl font-semibold tracking-[-0.02em] mb-4">2do AI</h3>
+            <p class="text-muted leading-relaxed mb-6">Keeps everyday tasks, long-term goals and someday dreams in one place, reminds you of plans you set aside, and suggests a first step.</p>
+            <a href="https://2doai.app" target="_blank" rel="noopener noreferrer" class="ext-link">2doai.app <span class="arrow">↗</span></a>
+          </div>
+        </article>
+
+        <article class="grid md:grid-cols-12 gap-8 md:gap-12 items-center reveal">
+          <a href="https://crisisassistant.app" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true" class="shot md:col-span-7">
+            <img src="../refs/crisis.png" width="1600" height="900" loading="lazy" alt="" class="w-full aspect-[16/10] object-cover object-top rounded-[calc(var(--radius-media)-8px)]">
+          </a>
+          <div class="md:col-span-5">
+            <p class="eyebrow mb-4">03 / 03</p>
+            <h3 class="text-2xl md:text-3xl font-semibold tracking-[-0.02em] mb-4">Crisis Assistant</h3>
+            <p class="text-muted leading-relaxed mb-6">Works out how much water, food and other emergency supplies your household needs, then tracks expiry dates. Two minutes, no account needed.</p>
+            <a href="https://crisisassistant.app" target="_blank" rel="noopener noreferrer" class="ext-link">crisisassistant.app <span class="arrow">↗</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section" aria-label="About Me">
+    <div class="mx-auto max-w-6xl px-4 md:px-6 grid md:grid-cols-12 gap-10">
+      <div class="md:col-span-4 reveal">
+        <p class="eyebrow mb-4">About</p>
+        <h2 class="h2">About Me</h2>
+      </div>
+      <div class="md:col-span-8 space-y-6 text-lg leading-relaxed text-foreground/85 reveal">
+        <p>With four years of hands-on experience in software engineering, I specialize in building robust, scalable backend systems using Java and the Spring Boot ecosystem. My expertise spans designing RESTful APIs, implementing complex business logic, and integrating enterprise-grade systems that power critical operations.</p>
+        <p>What sets me apart is my strong analytical mindset and deep understanding of business processes. I act as a bridge between business requirements and technical implementation, translating complex stakeholder needs into clean, maintainable code.</p>
+        <p>I'm an active AI user who embraces spec-driven development — leveraging AI as a tool for achieving business goals faster and more effectively while using fewer resources. AI accelerates my workflow; it never replaces my judgment.</p>
+        <div class="pt-8 mt-4 border-t border-border">
+          <p class="eyebrow mb-3">Beyond Work</p>
+          <p class="text-base text-muted">Outside of engineering, I'm fascinated by astronomy and physics. I stay active through regular fitness routines, constantly explore emerging technologies and automation tools, and believe that continuous learning is the foundation of both personal and professional growth.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="section" aria-label="Skills and Technologies">
+    <div class="mx-auto max-w-6xl px-4 md:px-6">
+      <p class="eyebrow mb-4 reveal">Skills</p>
+      <h2 class="h2 mb-16 reveal">Skills &amp; Technologies</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="bg-card border border-border rounded-2xl p-6 reveal"><h3 class="eyebrow mb-4">Backend</h3><div class="flex flex-wrap gap-2"><span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">REST APIs</span><span class="chip">SOAP</span><span class="chip">Apache Camel</span><span class="chip">RabbitMQ</span></div></div>
+        <div class="bg-card border border-border rounded-2xl p-6 reveal"><h3 class="eyebrow mb-4">Data &amp; ORM</h3><div class="flex flex-wrap gap-2"><span class="chip">MySQL</span><span class="chip">MariaDB</span><span class="chip">PostgreSQL</span><span class="chip">Hibernate</span><span class="chip">JPA</span><span class="chip">JOOQ</span></div></div>
+        <div class="bg-card border border-border rounded-2xl p-6 reveal"><h3 class="eyebrow mb-4">Data Analysis &amp; Reporting</h3><div class="flex flex-wrap gap-2"><span class="chip">SQL</span><span class="chip">Python</span><span class="chip">PowerBI</span><span class="chip">Dashboards</span><span class="chip">KPI Monitoring</span></div></div>
+        <div class="bg-card border border-border rounded-2xl p-6 reveal"><h3 class="eyebrow mb-4">DevOps &amp; Tools</h3><div class="flex flex-wrap gap-2"><span class="chip">Docker</span><span class="chip">Git</span><span class="chip">GitHub Actions</span><span class="chip">Maven</span><span class="chip">JIRA</span><span class="chip">Confluence</span><span class="chip">JetBrains</span><span class="chip">OAuth2</span></div></div>
+        <div class="bg-card border border-border rounded-2xl p-6 reveal"><h3 class="eyebrow mb-4">Testing</h3><div class="flex flex-wrap gap-2"><span class="chip">JUnit 5</span><span class="chip">Mockito</span><span class="chip">AssertJ</span></div></div>
+        <div class="bg-card border border-border rounded-2xl p-6 reveal"><h3 class="eyebrow mb-4">Management &amp; Business</h3><div class="flex flex-wrap gap-2"><span class="chip">Agile</span><span class="chip">SAFe</span><span class="chip">Scrum</span><span class="chip">Business Analysis</span><span class="chip">UML</span></div></div>
+        <div class="bg-card border border-border rounded-2xl p-6 md:col-span-2 reveal"><h3 class="eyebrow mb-4">AI</h3><div class="flex flex-wrap gap-2"><span class="chip">Spec-Driven Development</span><span class="chip">RAG</span><span class="chip">Agentic Workflow</span><span class="chip">Claude Code</span><span class="chip">Prompt Engineering</span><span class="chip">n8n</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section" aria-label="Contact">
+    <div class="mx-auto max-w-6xl px-4 md:px-6 grid md:grid-cols-12 gap-12">
+      <div class="md:col-span-5 reveal">
+        <p class="eyebrow mb-4">Contact</p>
+        <h2 class="h2 mb-6">Get in Touch</h2>
+        <p class="text-muted leading-relaxed mb-10">Have a project in mind or just want to say hello? I'd love to hear from you.</p>
+        <dl class="space-y-5 text-sm">
+          <div><dt class="eyebrow mb-1">Email</dt><dd><a href="mailto:thedariusz@gmail.com" class="ext-link">thedariusz@gmail.com</a></dd></div>
+          <div><dt class="eyebrow mb-1">Location</dt><dd class="text-muted">Warsaw, Poland</dd></div>
+          <div><dt class="eyebrow mb-2">Elsewhere</dt><dd class="flex gap-5" data-slot="social-icons"></dd></div>
+        </dl>
+      </div>
+      <form class="md:col-span-7 bg-card border border-border rounded-[var(--radius-media)] p-6 md:p-8 space-y-4 reveal" onsubmit="return false">
+        <input class="field" placeholder="Your name" aria-label="Your name">
+        <input class="field" type="email" placeholder="Your email" aria-label="Your email">
+        <textarea class="field resize-none" rows="5" placeholder="Your message" aria-label="Your message"></textarea>
+        <button class="btn-primary w-full justify-center">Send Message</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-border py-12" role="contentinfo">
+  <div class="mx-auto max-w-6xl px-4 md:px-6 grid md:grid-cols-2 gap-10 text-sm text-muted">
+    <div class="space-y-1.5">
+      <p class="eyebrow mb-3">Business Info</p>
+      <p class="text-foreground/85">TheDariusz Dariusz Szczepański</p>
+      <p>NIP: PL9521789822</p>
+      <p>Warsaw, Poland</p>
+    </div>
+    <div class="flex md:justify-end items-end gap-5" data-slot="social-icons"></div>
+  </div>
+  <p class="mx-auto max-w-6xl px-4 md:px-6 mt-10 pt-6 border-t border-border text-xs text-subtle">© 2026 TheDariusz Dariusz Szczepański. All rights reserved.</p>
+</footer>
+
+<!-- Prototype-only variant switcher -->
+<div class="fixed bottom-4 left-4 z-[60] rounded-2xl border border-border bg-card/95 backdrop-blur p-3 text-xs font-mono space-y-2 shadow-2xl">
+  <p class="text-subtle uppercase tracking-wider">Prototype variants</p>
+  <div class="flex items-center gap-2"><span class="w-14 text-muted">Canvas</span>
+    <button data-set="canvas:black" class="px-2 py-1 rounded-full border border-border">Black</button>
+    <button data-set="canvas:charcoal" class="px-2 py-1 rounded-full border border-border">Charcoal</button>
+  </div>
+  <div class="flex items-center gap-2"><span class="w-14 text-muted">Glow</span>
+    <button data-set="glow:off" class="px-2 py-1 rounded-full border border-border">Off</button>
+    <button data-set="glow:on" class="px-2 py-1 rounded-full border border-border">Subtle</button>
+  </div>
+</div>
+
+<script>
+  // Fill slots from templates
+  document.querySelectorAll("[data-slot]").forEach((el) => {
+    el.appendChild(document.getElementById(el.dataset.slot).content.cloneNode(true));
+  });
+
+  // Mobile menu
+  const btn = document.getElementById("menu-btn"), menu = document.getElementById("mobile-menu");
+  btn.addEventListener("click", () => {
+    const open = menu.classList.toggle("hidden") === false;
+    btn.setAttribute("aria-expanded", open);
+    btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  });
+  menu.querySelectorAll("nav > a").forEach((a) => a.addEventListener("click", () => btn.click()));
+
+  // Close CV dropdowns on outside click
+  document.addEventListener("click", (e) => {
+    document.querySelectorAll("details.cv[open]").forEach((d) => { if (!d.contains(e.target)) d.open = false; });
+  });
+
+  // Scroll reveal
+  const io = new IntersectionObserver((entries) => entries.forEach((en) => {
+    if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+  }), { rootMargin: "0px 0px -80px 0px" });
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+  // Variant switcher
+  const paint = () => document.querySelectorAll("[data-set]").forEach((b) => {
+    const [k, v] = b.dataset.set.split(":");
+    const on = document.documentElement.dataset[k] === v;
+    b.style.background = on ? "#ededed" : "";
+    b.style.color = on ? "#0a0a0a" : "";
+  });
+  document.querySelectorAll("[data-set]").forEach((b) => b.addEventListener("click", () => {
+    const [k, v] = b.dataset.set.split(":");
+    document.documentElement.dataset[k] = v;
+    paint();
+  }));
+  paint();
+</script>
+</body>
+</html>
