@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { flushSync } from "react-dom";
 import { siteData } from "@/data/siteData";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,7 +30,10 @@ const ContactSection = () => {
       result.error.issues.forEach((err) => {
         if (err.path[0]) fieldErrors[err.path[0] as string] = err.message;
       });
-      setErrors(fieldErrors);
+      // Commit aria-invalid/aria-describedby before focusing, so the error is read on focus
+      flushSync(() => setErrors(fieldErrors));
+      const firstInvalid = (["name", "email", "message"] as const).find((f) => fieldErrors[f]);
+      document.getElementById(`contact-${firstInvalid}`)?.focus();
       return;
     }
     setErrors({});
@@ -56,6 +60,13 @@ const ContactSection = () => {
       setIsSubmitting(false);
     }
   };
+
+  const fieldA11y = (field: string) => ({
+    id: `contact-${field}`,
+    name: field,
+    "aria-invalid": errors[field] ? true : undefined,
+    "aria-describedby": errors[field] ? `contact-${field}-error` : undefined,
+  });
 
   const handleChange = (field: string, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -107,39 +118,44 @@ const ContactSection = () => {
               <Input
                 placeholder="Your name"
                 value={form.name}
+                {...fieldA11y("name")}
+                autoComplete="name"
                 onChange={(e) => handleChange("name", e.target.value)}
                 aria-label="Your name"
                 disabled={isSubmitting}
-                className="bg-background border-subtle/70 focus:border-primary/50 text-foreground placeholder:text-subtle"
+                className="bg-background border-subtle/70 focus:border-primary/50 aria-invalid:border-destructive text-foreground placeholder:text-subtle"
                 required
               />
-              {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
+              {errors.name && <p id="contact-name-error" className="text-sm text-destructive mt-1">{errors.name}</p>}
             </div>
             <div>
               <Input
                 type="email"
                 placeholder="Your email"
                 value={form.email}
+                {...fieldA11y("email")}
+                autoComplete="email"
                 onChange={(e) => handleChange("email", e.target.value)}
                 aria-label="Your email"
                 disabled={isSubmitting}
-                className="bg-background border-subtle/70 focus:border-primary/50 text-foreground placeholder:text-subtle"
+                className="bg-background border-subtle/70 focus:border-primary/50 aria-invalid:border-destructive text-foreground placeholder:text-subtle"
                 required
               />
-              {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
+              {errors.email && <p id="contact-email-error" className="text-sm text-destructive mt-1">{errors.email}</p>}
             </div>
             <div>
               <Textarea
                 placeholder="Your message"
                 value={form.message}
+                {...fieldA11y("message")}
                 onChange={(e) => handleChange("message", e.target.value)}
                 aria-label="Your message"
                 rows={5}
                 disabled={isSubmitting}
-                className="bg-background border-subtle/70 focus:border-primary/50 text-foreground placeholder:text-subtle resize-none"
+                className="bg-background border-subtle/70 focus:border-primary/50 aria-invalid:border-destructive text-foreground placeholder:text-subtle resize-none"
                 required
               />
-              {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
+              {errors.message && <p id="contact-message-error" className="text-sm text-destructive mt-1">{errors.message}</p>}
             </div>
             <Button
               type="submit"

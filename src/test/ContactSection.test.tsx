@@ -41,6 +41,20 @@ describe("ContactSection form validation", () => {
     expect(screen.queryByText("Name is required")).not.toBeInTheDocument();
   });
 
+  it("links errors to their fields and focuses the first invalid one", () => {
+    render(<ContactSection />);
+    fillForm("John", "not-an-email", "");
+
+    fireEvent.click(screen.getByRole("button", { name: /send message/i }));
+
+    const email = screen.getByLabelText("Your email");
+    expect(email).toHaveAttribute("aria-invalid", "true");
+    expect(email).toHaveAccessibleDescription("Please enter a valid email");
+    expect(screen.getByLabelText("Your message")).toHaveAccessibleDescription("Message is required");
+    expect(screen.getByLabelText("Your name")).not.toHaveAttribute("aria-invalid");
+    expect(email).toHaveFocus();
+  });
+
   it("does not call webhook when validation fails", () => {
     const fetchSpy = vi.spyOn(globalThis, "fetch");
     render(<ContactSection />);

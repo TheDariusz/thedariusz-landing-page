@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import { siteData } from "@/data/siteData";
 import CVDownloadButton from "@/components/CVDownloadButton";
@@ -7,12 +7,25 @@ import SocialLinks from "@/components/SocialLinks";
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!isMobileOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      // defaultPrevented: Escape already handled by an open Radix layer (the CV dropdown)
+      if (e.key !== "Escape" || e.defaultPrevented) return;
+      setIsMobileOpen(false);
+      toggleRef.current?.focus();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [isMobileOpen]);
 
   const handleNavClick = (href: string) => {
     setIsMobileOpen(false);
@@ -56,9 +69,12 @@ const Header = () => {
 
         {/* Mobile Toggle */}
         <button
+          ref={toggleRef}
           className="md:hidden text-foreground"
           onClick={() => setIsMobileOpen(!isMobileOpen)}
           aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMobileOpen}
+          aria-controls="mobile-menu"
         >
           {isMobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -66,7 +82,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMobileOpen && (
-        <div data-testid="mobile-menu" className="md:hidden bg-background/95 backdrop-blur-lg border-b border-border">
+        <div id="mobile-menu" data-testid="mobile-menu" className="md:hidden bg-background/95 backdrop-blur-lg border-b border-border">
           <nav className="container mx-auto px-4 py-6 flex flex-col gap-4" aria-label="Mobile navigation">
             {siteData.navLinks.map((link) => (
               <button
