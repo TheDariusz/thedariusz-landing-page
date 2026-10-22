@@ -35,6 +35,17 @@ describe("siteData", () => {
     });
   });
 
+  it("has three portfolio projects with complete data", () => {
+    expect(siteData.portfolio.projects).toHaveLength(3);
+    siteData.portfolio.projects.forEach((project) => {
+      expect(project.name).toBeTruthy();
+      expect(project.description).toBeTruthy();
+      expect(project.imageAlt).toBeTruthy();
+      expect(project.url).toMatch(/^https:\/\//);
+      expect(project.image).toBeTruthy();
+    });
+  });
+
   it("has CV links for both languages and formats", () => {
     expect(siteData.cvLinks.en.pdf).toMatch(/\.pdf$/);
     expect(siteData.cvLinks.en.md).toMatch(/\.md$/);

@@ -9,30 +9,26 @@ const XIcon = ({ className }: { className?: string }) => (
 import { siteData } from "@/data/siteData";
 
 interface SocialLinksProps {
-  showLabels?: boolean;
   iconClassName?: string;
-  className?: string;
 }
 
 const socialItems = [
   { href: siteData.socialLinks.github, label: "GitHub", icon: Github },
   { href: siteData.socialLinks.linkedin, label: "LinkedIn", icon: Linkedin },
-  { href: siteData.socialLinks.twitter, label: "X (Twitter)", displayLabel: "X", icon: XIcon },
+  { href: siteData.socialLinks.twitter, label: "X (Twitter)", icon: XIcon },
 ];
 
-const SocialLinks = ({ showLabels = false, iconClassName = "w-5 h-5", className = "" }: SocialLinksProps) => (
+const SocialLinks = ({ iconClassName = "w-5 h-5" }: SocialLinksProps) => (
   <>
-    {socialItems.map(({ href, label, displayLabel, icon: Icon }) => (
+    {socialItems.map(({ href, label, icon: Icon }) => (
       <a
         key={label}
         href={href}
         target="_blank"
         rel="noopener noreferrer"
         aria-label={label}
-        className={className}
       >
         <Icon className={iconClassName} />
-        {showLabels && <span className="text-sm">{displayLabel || label}</span>}
       </a>
     ))}
   </>

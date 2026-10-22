@@ -22,7 +22,7 @@ const CVDownloadButton = ({ size = "default", className = "" }: CVDownloadButton
         <Button
           variant="outline"
           size={size}
-          className={`border-primary/50 text-foreground hover:bg-primary/10 hover:border-primary ${className}`}
+          className={`rounded-full border-border bg-transparent text-foreground hover:bg-card hover:border-subtle ${className}`}
         >
           <Download className="w-4 h-4 mr-2" />
           {siteData.hero.ctaSecondary}

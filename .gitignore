@@ -40,3 +40,9 @@ docs/*.*
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+.claude/.10x-cli-manifest.json
+# 10x CLI vendored skills (managed by the CLI, not tracked)
+.claude/skills/10x-*/
+.claude/skills/pack-init/
+.claude/skills/setup-cicd/
+.claude/skills/tf-registry/

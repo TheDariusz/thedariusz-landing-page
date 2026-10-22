@@ -10,6 +10,7 @@ test.describe("Navigation", () => {
 
     test("nav links scroll to correct sections", async ({ page }) => {
       for (const [label, sectionId] of [
+        ["Projects", "#projects"],
         ["About", "#about"],
         ["Skills", "#skills"],
         ["Contact", "#contact"],
