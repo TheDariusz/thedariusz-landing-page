@@ -111,7 +111,7 @@ const ContactSection = () => {
         <FadeInSection className="md:col-span-7" delay={0.1}>
           <form
             onSubmit={handleSubmit}
-            className="bg-card border border-border rounded-[var(--radius-media)] p-6 md:p-8 space-y-4"
+            className="bg-card border border-border rounded-media p-6 md:p-8 space-y-4"
             noValidate
           >
             <div>

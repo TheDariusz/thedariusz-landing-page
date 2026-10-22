@@ -29,7 +29,7 @@ const PortfolioSection = () => {
                     rel="noopener noreferrer"
                     tabIndex={-1}
                     aria-hidden="true"
-                    className={`group block md:col-span-7 bg-card border border-border rounded-[var(--radius-media)] p-2 md:p-3 overflow-hidden transition-colors hover:border-subtle${screenshotRight ? " md:order-2" : ""}`}
+                    className={`group block md:col-span-7 bg-card border border-border rounded-media p-2 md:p-3 overflow-hidden transition-colors hover:border-subtle${screenshotRight ? " md:order-2" : ""}`}
                   >
                     <img
                       src={project.image}
@@ -38,7 +38,7 @@ const PortfolioSection = () => {
                       height={900}
                       loading="lazy"
                       decoding="async"
-                      className="w-full aspect-video object-cover object-top rounded-[calc(var(--radius-media)-8px)] transition-transform duration-[600ms] ease-[cubic-bezier(.2,.7,.2,1)] motion-safe:group-hover:scale-[1.025]"
+                      className="w-full aspect-video object-cover object-top rounded-[calc(var(--radius-media)-8px)] md:rounded-[calc(var(--radius-media)-12px)] transition-transform duration-[600ms] ease-[cubic-bezier(.2,.7,.2,1)] motion-safe:group-hover:scale-[1.025]"
                     />
                   </a>
                   <div className={`md:col-span-5${screenshotRight ? " md:order-1" : ""}`}>

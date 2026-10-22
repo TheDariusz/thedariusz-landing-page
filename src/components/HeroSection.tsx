@@ -22,7 +22,7 @@ const HeroSection = () => {
     <section className="relative" aria-label="Introduction">
       {/* Clip the glow here, not on the section, so it can't cause horizontal scroll */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        <div className="absolute -top-40 right-[-10%] w-[720px] h-[720px] rounded-full bg-[radial-gradient(closest-side,rgb(225_29_72/0.14),transparent)]" />
+        <div className="absolute -top-40 right-[-10%] w-[720px] h-[720px] rounded-full bg-[radial-gradient(closest-side,hsl(var(--primary)/0.14),transparent)]" />
       </div>
 
       <div className="relative mx-auto max-w-6xl px-4 md:px-6 pt-32 pb-24 md:pt-44 md:pb-32 grid md:grid-cols-12 gap-10 md:gap-12 items-center">
@@ -61,7 +61,7 @@ const HeroSection = () => {
             height={480}
             fetchPriority="high"
             alt={`Portrait of ${siteData.name}`}
-            className="w-40 h-40 md:w-full md:h-auto md:max-w-[340px] md:ml-auto aspect-square object-cover rounded-full md:rounded-[var(--radius-media)] border border-border"
+            className="w-40 h-40 md:w-full md:h-auto md:max-w-[340px] md:ml-auto aspect-square object-cover rounded-full md:rounded-media border border-border"
           />
         </div>
       </div>
