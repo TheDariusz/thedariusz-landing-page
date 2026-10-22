@@ -40,7 +40,7 @@ export const siteData = {
     { value: "4+", label: "Years Experience" },
     { value: "10+", label: "Enterprise Projects" },
     { value: "Java & Spring Boot", label: "Core Expertise" },
-    { value: "AI-Driven", label: "Development Approach" },
+    { value: "3", label: "Apps Shipped" },
   ],
   portfolio: {
     heading: "Selected projects",
@@ -74,12 +74,12 @@ export const siteData = {
   about: {
     heading: "About Me",
     professional: [
-      "With four years of hands-on experience in software engineering, I specialize in building robust, scalable backend systems using Java and the Spring Boot ecosystem. My expertise spans designing RESTful APIs, implementing complex business logic, and integrating enterprise-grade systems that power critical operations.",
-      "What sets me apart is my strong analytical mindset and deep understanding of business processes. I act as a bridge between business requirements and technical implementation, translating complex stakeholder needs into clean, maintainable code. My background in business analysis allows me to see the bigger picture while delivering precise technical solutions.",
-      "I'm an active AI user who embraces spec-driven development — leveraging AI as a tool for achieving business goals faster and more effectively while using fewer resources. However, every output remains under my full control, backed by proper tests and validations. AI accelerates my workflow; it never replaces my judgment.",
+      "I've spent four years as a software engineer building scalable backend systems in Java and Spring Boot. Most of that time goes into designing REST APIs, implementing complex business logic, and integrating the enterprise systems that run critical operations.",
+      "I have a background in business analysis, so I start by understanding the business process before I write code. I work between stakeholders and the technical side, turning what they need into clean, maintainable code without losing sight of the overall goal.",
+      "I use AI a lot and follow spec-driven development, which helps me reach business goals faster and with fewer resources. I still review every output myself and back it with tests and validation.",
     ],
     beyondWork:
-      "Outside of engineering, I'm fascinated by astronomy and physics — the kind of thinking that reminds me how vast the world is beyond code. I stay active through regular fitness routines, constantly explore emerging technologies and automation tools, and believe that continuous learning is the foundation of both personal and professional growth.",
+      "Outside of engineering, I'm fascinated by astronomy and physics, which remind me how much exists beyond code. I train regularly and keep trying new technologies and automation tools, because I believe continuous learning matters as much for personal growth as for work.",
   },
   skills: {
     heading: "Skills & Technologies",
