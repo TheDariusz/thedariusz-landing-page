@@ -6,6 +6,7 @@ test.describe("Content and layout", () => {
   });
 
   test("all main sections are present", async ({ page }) => {
+    await expect(page.locator("#projects")).toBeAttached();
     await expect(page.locator("#about")).toBeAttached();
     await expect(page.locator("#skills")).toBeAttached();
     await expect(page.locator("#contact")).toBeAttached();
@@ -14,6 +15,26 @@ test.describe("Content and layout", () => {
   test("hero shows name and tagline", async ({ page }) => {
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Dariusz Szczepański");
     await expect(page.getByText("Software Engineer | Backend & Integration Specialist")).toBeVisible();
+  });
+
+  test("projects link to the live apps in a new tab", async ({ page }) => {
+    const projects = page.locator("#projects");
+    const expected = ["https://ai-cards.app", "https://2doai.app", "https://crisisassistant.app"];
+
+    const textLinks = projects.getByRole("link");
+    await expect(textLinks).toHaveText(expected.map((url) => `${new URL(url).hostname} ↗`));
+    for (const [i, url] of expected.entries()) {
+      const link = textLinks.nth(i);
+      await expect(link).toHaveAttribute("href", url);
+      await expect(link).toHaveAttribute("target", "_blank");
+      await expect(link).toHaveAttribute("rel", /noopener/);
+    }
+
+    const screenshotLinks = projects.locator('a[aria-hidden="true"]');
+    await expect(screenshotLinks).toHaveCount(3);
+    for (const link of await screenshotLinks.all()) {
+      await expect(link).toHaveAttribute("tabindex", "-1");
+    }
   });
 
   test("all 7 skill categories render", async ({ page }) => {

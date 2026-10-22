@@ -454,37 +454,37 @@ Contact keeps its two-column layout, and the contact details are shown as a mono
 
 #### Automated
 
-- [x] 2.1 Lint passes
-- [x] 2.2 Type checking passes
-- [x] 2.3 Unit tests pass
-- [x] 2.4 E2E tests pass
+- [x] 2.1 Lint passes — 967bf14
+- [x] 2.2 Type checking passes — 967bf14
+- [x] 2.3 Unit tests pass — 967bf14
+- [x] 2.4 E2E tests pass — 967bf14
 
 #### Manual
 
-- [x] 2.5 Hero matches the prototype at 375/768/1440px, with no horizontal scroll from the glow
-- [x] 2.6 Exactly one subtle red glow; no photo ring and no bounce animation
-- [x] 2.7 Header shows the GitHub/LinkedIn/X icons and the EN/PL CV dropdown; blur on scroll without a shadow
-- [x] 2.8 With Reduce motion on, the hero text appears without sliding
+- [x] 2.5 Hero matches the prototype at 375/768/1440px, with no horizontal scroll from the glow — 967bf14
+- [x] 2.6 Exactly one subtle red glow; no photo ring and no bounce animation — 967bf14
+- [x] 2.7 Header shows the GitHub/LinkedIn/X icons and the EN/PL CV dropdown; blur on scroll without a shadow — 967bf14
+- [x] 2.8 With Reduce motion on, the hero text appears without sliding — 967bf14
 
 ### Phase 3: Portfolio ("Projects") Section
 
 #### Automated
 
-- [ ] 3.1 Assets exist and are each under 150 KB
-- [ ] 3.2 Lint passes
-- [ ] 3.3 Type checking passes
-- [ ] 3.4 Unit tests pass, including portfolio data and section assertions
-- [ ] 3.5 Build passes
-- [ ] 3.6 E2E tests pass, including Projects nav and project links
+- [x] 3.1 Assets exist and are each under 150 KB
+- [x] 3.2 Lint passes
+- [x] 3.3 Type checking passes
+- [x] 3.4 Unit tests pass, including portfolio data and section assertions
+- [x] 3.5 Build passes
+- [x] 3.6 E2E tests pass, including Projects nav and project links
 
 #### Manual
 
-- [ ] 3.7 Desktop rows alternate sides; indices read 01/03–03/03
-- [ ] 3.8 Rows fade up on scroll; screenshot zoom and arrow nudge on hover
-- [ ] 3.9 Mobile shows the screenshot first in every row, with no horizontal scroll
-- [ ] 3.10 Screenshot and text link open the live app in a new tab
-- [ ] 3.11 One focus stop per project with a visible focus ring
-- [ ] 3.12 Screenshots load lazily
+- [x] 3.7 Desktop rows alternate sides; indices read 01/03–03/03
+- [x] 3.8 Rows fade up on scroll; screenshot zoom and arrow nudge on hover
+- [x] 3.9 Mobile shows the screenshot first in every row, with no horizontal scroll
+- [x] 3.10 Screenshot and text link open the live app in a new tab
+- [x] 3.11 One focus stop per project with a visible focus ring
+- [x] 3.12 Screenshots load lazily
 
 ### Phase 4: Remaining Sections & Docs
 

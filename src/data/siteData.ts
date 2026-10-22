@@ -1,3 +1,7 @@
+import aiCardsImage from "@/assets/projects/ai-cards.webp";
+import twoDoAiImage from "@/assets/projects/2doai.webp";
+import crisisAssistantImage from "@/assets/projects/crisis-assistant.webp";
+
 export const siteData = {
   name: "Dariusz Szczepański",
   tagline: "Software Engineer | Backend & Integration Specialist",
@@ -22,6 +26,7 @@ export const siteData = {
     twitter: "https://x.com/thedariusz_dev",
   },
   navLinks: [
+    { label: "Projects", href: "#projects" },
     { label: "About", href: "#about" },
     { label: "Skills", href: "#skills" },
     { label: "Contact", href: "#contact" },
@@ -37,6 +42,35 @@ export const siteData = {
     { value: "Java & Spring Boot", label: "Core Expertise" },
     { value: "AI-Driven", label: "Development Approach" },
   ],
+  portfolio: {
+    heading: "Selected projects",
+    projects: [
+      {
+        name: "AI Cards",
+        url: "https://ai-cards.app",
+        description:
+          "English flashcards for Polish speakers. Type a word you heard; AI builds the card (meaning, example sentence, audio) and a three-day routine takes it from first read to active recall.",
+        image: aiCardsImage,
+        imageAlt: "AI Cards landing page",
+      },
+      {
+        name: "2do AI",
+        url: "https://2doai.app",
+        description:
+          "Keeps everyday tasks, long-term goals and someday dreams in one place, reminds you of plans you set aside, and suggests a first step.",
+        image: twoDoAiImage,
+        imageAlt: "2do AI landing page",
+      },
+      {
+        name: "Crisis Assistant",
+        url: "https://crisisassistant.app",
+        description:
+          "Works out how much water, food and other emergency supplies your household needs, then tracks expiry dates. Two minutes, no account needed.",
+        image: crisisAssistantImage,
+        imageAlt: "Crisis Assistant landing page",
+      },
+    ],
+  },
   about: {
     heading: "About Me",
     professional: [

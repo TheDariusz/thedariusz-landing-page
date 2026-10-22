@@ -9,6 +9,7 @@ describe("Index page", () => {
     expect(screen.getByRole("banner")).toBeInTheDocument();
     expect(screen.getByLabelText("Introduction")).toBeInTheDocument();
     expect(screen.getByLabelText("Key highlights")).toBeInTheDocument();
+    expect(screen.getByLabelText("Projects")).toBeInTheDocument();
     expect(screen.getByLabelText("About Me")).toBeInTheDocument();
     expect(screen.getByLabelText("Skills and Technologies")).toBeInTheDocument();
     expect(screen.getByLabelText("Contact")).toBeInTheDocument();
