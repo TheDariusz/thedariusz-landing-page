@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import CVDownloadButton from "@/components/CVDownloadButton";
 import profilePhoto from "@/assets/profile-photo.webp";
 
-// Staggered entrance for the hero text lines, ~80ms apart
+// Staggered entrance for the supporting lines only. The name and portrait are the LCP
+// candidates (mobile / desktop): fading them in delays LCP by the whole animation.
 const fadeUp = (step: number) => ({
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -26,28 +27,22 @@ const HeroSection = () => {
 
       <div className="relative mx-auto max-w-6xl px-4 md:px-6 pt-32 pb-24 md:pt-44 md:pb-32 grid md:grid-cols-12 gap-10 md:gap-12 items-center">
         <div className="md:col-span-7 order-2 md:order-1">
+          <p className="font-mono text-xs uppercase tracking-[0.12em] text-subtle mb-4">
+            {siteData.hero.greeting}
+          </p>
+
+          <h1 className="text-5xl md:text-7xl lg:text-[88px] font-semibold tracking-[-0.04em] leading-[0.95] mb-6">
+            {siteData.name}
+          </h1>
+
           <motion.p
             {...fadeUp(0)}
-            className="font-mono text-xs uppercase tracking-[0.12em] text-subtle mb-4"
-          >
-            {siteData.hero.greeting}
-          </motion.p>
-
-          <motion.h1
-            {...fadeUp(1)}
-            className="text-5xl md:text-7xl lg:text-[88px] font-semibold tracking-[-0.04em] leading-[0.95] mb-6"
-          >
-            {siteData.name}
-          </motion.h1>
-
-          <motion.p
-            {...fadeUp(2)}
             className="max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed mb-10"
           >
             {siteData.tagline}
           </motion.p>
 
-          <motion.div {...fadeUp(3)} className="flex flex-wrap gap-3">
+          <motion.div {...fadeUp(1)} className="flex flex-wrap gap-3">
             <Button
               size="lg"
               onClick={() => handleScroll("#contact")}
@@ -59,20 +54,16 @@ const HeroSection = () => {
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="md:col-span-5 order-1 md:order-2"
-        >
+        <div className="md:col-span-5 order-1 md:order-2">
           <img
             src={profilePhoto}
             width={480}
             height={480}
+            fetchPriority="high"
             alt={`Portrait of ${siteData.name}`}
             className="w-40 h-40 md:w-full md:h-auto md:max-w-[340px] md:ml-auto aspect-square object-cover rounded-full md:rounded-[var(--radius-media)] border border-border"
           />
-        </motion.div>
+        </div>
       </div>
     </section>
   );
