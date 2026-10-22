@@ -51,7 +51,7 @@ const HeroSection = () => {
             <Button
               size="lg"
               onClick={() => handleScroll("#contact")}
-              className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 rounded-full"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 rounded-full transition motion-safe:hover:-translate-y-0.5"
             >
               {siteData.hero.ctaPrimary}
             </Button>

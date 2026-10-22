@@ -1,12 +1,12 @@
-import { useState, useRef } from "react";
-import { motion, useInView } from "motion/react";
+import { useState } from "react";
 import { siteData } from "@/data/siteData";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Send, Mail, MapPin, Loader2 } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 import SocialLinks from "@/components/SocialLinks";
+import FadeInSection from "@/components/FadeInSection";
 import { z } from "zod";
 
 const contactSchema = z.object({
@@ -16,8 +16,6 @@ const contactSchema = z.object({
 });
 
 const ContactSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
   const { toast } = useToast();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -65,64 +63,44 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 px-4" aria-label="Contact">
-      <div className="container mx-auto max-w-4xl" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-foreground">
+    <section id="contact" className="py-24 md:py-32 lg:py-40 px-4 border-t border-border" aria-label="Contact">
+      <div className="container mx-auto max-w-6xl grid md:grid-cols-12 gap-12">
+        <FadeInSection className="md:col-span-5">
+          <p className="font-mono text-xs uppercase tracking-[0.12em] text-subtle mb-4">Contact</p>
+          <h2 className="text-3xl md:text-5xl font-semibold tracking-[-0.03em] mb-6 text-foreground">
             {siteData.contact.heading}
           </h2>
-        </motion.div>
+          <p className="text-muted-foreground leading-relaxed mb-10">{siteData.contact.subtitle}</p>
 
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Left: Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="space-y-6"
-          >
+          <dl className="space-y-5 text-sm">
             <div>
-              <h3 className="text-xl font-semibold text-foreground mb-2">
-                {siteData.contact.subheading}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {siteData.contact.subtitle}
-              </p>
+              <dt className="font-mono text-xs uppercase tracking-[0.12em] text-subtle mb-1">Email</dt>
+              <dd>
+                <a
+                  href={`mailto:${siteData.email}`}
+                  className="font-mono text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors"
+                >
+                  {siteData.email}
+                </a>
+              </dd>
             </div>
-
-            <div className="space-y-4 pt-2">
-              <a
-                href={`mailto:${siteData.email}`}
-                className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group"
-              >
-                <Mail className="w-5 h-5 text-muted-foreground" />
-                <span className="group-hover:underline underline-offset-4">{siteData.email}</span>
-              </a>
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <MapPin className="w-5 h-5 text-muted-foreground" />
-                <span>{siteData.contact.location}</span>
-              </div>
+            <div>
+              <dt className="font-mono text-xs uppercase tracking-[0.12em] text-subtle mb-1">Location</dt>
+              <dd className="text-muted-foreground">{siteData.contact.location}</dd>
             </div>
-
-            <div className="flex items-center gap-5 pt-4">
-              <SocialLinks
-                showLabels
-                className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-              />
+            <div>
+              <dt className="font-mono text-xs uppercase tracking-[0.12em] text-subtle mb-2">Elsewhere</dt>
+              <dd className="flex items-center gap-5">
+                <SocialLinks iconClassName="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
+              </dd>
             </div>
-          </motion.div>
+          </dl>
+        </FadeInSection>
 
-          {/* Right: Form */}
-          <motion.form
+        <FadeInSection className="md:col-span-7" delay={0.1}>
+          <form
             onSubmit={handleSubmit}
-            initial={{ opacity: 0, x: 20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-5"
+            className="bg-card border border-border rounded-[var(--radius-media)] p-6 md:p-8 space-y-4"
             noValidate
           >
             <div>
@@ -132,7 +110,7 @@ const ContactSection = () => {
                 onChange={(e) => handleChange("name", e.target.value)}
                 aria-label="Your name"
                 disabled={isSubmitting}
-                className="bg-secondary/50 border-border focus:border-primary/50 text-foreground placeholder:text-muted-foreground"
+                className="bg-background border-border focus:border-primary/50 text-foreground placeholder:text-subtle"
                 required
               />
               {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
@@ -145,7 +123,7 @@ const ContactSection = () => {
                 onChange={(e) => handleChange("email", e.target.value)}
                 aria-label="Your email"
                 disabled={isSubmitting}
-                className="bg-secondary/50 border-border focus:border-primary/50 text-foreground placeholder:text-muted-foreground"
+                className="bg-background border-border focus:border-primary/50 text-foreground placeholder:text-subtle"
                 required
               />
               {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
@@ -158,7 +136,7 @@ const ContactSection = () => {
                 aria-label="Your message"
                 rows={5}
                 disabled={isSubmitting}
-                className="bg-secondary/50 border-border focus:border-primary/50 text-foreground placeholder:text-muted-foreground resize-none"
+                className="bg-background border-border focus:border-primary/50 text-foreground placeholder:text-subtle resize-none"
                 required
               />
               {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
@@ -166,7 +144,7 @@ const ContactSection = () => {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="bg-primary text-primary-foreground hover:bg-primary/90 w-full px-8 rounded-full"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 w-full px-8 rounded-full transition motion-safe:hover:-translate-y-0.5"
             >
               {isSubmitting ? (
                 <>
@@ -180,8 +158,8 @@ const ContactSection = () => {
                 </>
               )}
             </Button>
-          </motion.form>
-        </div>
+          </form>
+        </FadeInSection>
       </div>
     </section>
   );

@@ -43,12 +43,12 @@ A clean, modern, single-page personal landing page that professionally presents 
 - **Goal:** Disposable design exploration, validate layout and content
 - **Deliverable:** Working one-page landing page, scaffolded via Lovable.dev, then iterated and hardened on the same Vite + React codebase
 - **Actual stack:** React 19, TypeScript 5.9, Vite 7, Tailwind CSS 4, shadcn/ui, motion v12, Zod 4
-- **Status:** All MVP sections implemented and functional. Contact form wired to n8n webhook. Test suite added. Major dependency upgrades and code cleanup completed.
+- **Status:** All MVP sections implemented and functional. Contact form wired to n8n webhook. Test suite added. Major dependency upgrades and code cleanup completed. Editorial redesign (charcoal palette, split hero) and a Projects section showcasing three shipped AI apps (AI Cards, 2do AI, Crisis Assistant) shipped in this phase.
 
 ### Phase 1 — Astro + React + Tailwind Rebuild
 - **Goal:** Production-quality site, clean codebase, performance-optimized, SSG for better SEO
 - **Stack:** Astro, React (islands), Tailwind CSS, TypeScript
-- **Additions:** Portfolio section, dark/light theme toggle, i18n support
+- **Additions:** dark/light theme toggle, i18n support (Portfolio section already shipped in Phase 0)
 - **Note:** Phase 0 codebase serves as a validated reference for layout, content, and component logic. The Astro rebuild will port these to an SSG architecture.
 
 ### Phase 2 — Blog & Interactivity
@@ -202,7 +202,7 @@ Displayed as categorized tag/badge groups (NO proficiency bars):
 | ~~Lovable.dev prototype becomes a perfectionism trap~~ | ~~Treat as disposable; hard 1-week cap~~ (Phase 0 complete) |
 | ~~Content not ready (About Me, tagline)~~ | ~~Draft placeholder content; iterate post-launch~~ (content written) |
 | n8n webhook downtime affects contact form | Mailto fallback link present; n8n monitoring recommended |
-| Missing portfolio weakens hiring manager impression | Strong skills section + CV download compensate; portfolio planned for Phase 1 |
+| ~~Missing portfolio weakens hiring manager impression~~ | ~~Strong skills section + CV download compensate~~ (Projects section shipped in Phase 0) |
 | Public phone number attracts spam | Displayed as text only (no `tel:` link); consider business VoIP number |
 | Astro migration effort — rewriting working code | Phase 0 codebase serves as validated reference; port logic incrementally |
 
@@ -210,7 +210,6 @@ Displayed as categorized tag/badge groups (NO proficiency bars):
 
 ## 10. Out of Scope (MVP)
 
-- Portfolio / project showcase section
 - Blog
 - Dark/light theme toggle
 - Multi-language (i18n) content

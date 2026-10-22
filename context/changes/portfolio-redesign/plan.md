@@ -470,35 +470,35 @@ Contact keeps its two-column layout, and the contact details are shown as a mono
 
 #### Automated
 
-- [x] 3.1 Assets exist and are each under 150 KB
-- [x] 3.2 Lint passes
-- [x] 3.3 Type checking passes
-- [x] 3.4 Unit tests pass, including portfolio data and section assertions
-- [x] 3.5 Build passes
-- [x] 3.6 E2E tests pass, including Projects nav and project links
+- [x] 3.1 Assets exist and are each under 150 KB — 8b73f58
+- [x] 3.2 Lint passes — 8b73f58
+- [x] 3.3 Type checking passes — 8b73f58
+- [x] 3.4 Unit tests pass, including portfolio data and section assertions — 8b73f58
+- [x] 3.5 Build passes — 8b73f58
+- [x] 3.6 E2E tests pass, including Projects nav and project links — 8b73f58
 
 #### Manual
 
-- [x] 3.7 Desktop rows alternate sides; indices read 01/03–03/03
-- [x] 3.8 Rows fade up on scroll; screenshot zoom and arrow nudge on hover
-- [x] 3.9 Mobile shows the screenshot first in every row, with no horizontal scroll
-- [x] 3.10 Screenshot and text link open the live app in a new tab
-- [x] 3.11 One focus stop per project with a visible focus ring
-- [x] 3.12 Screenshots load lazily
+- [x] 3.7 Desktop rows alternate sides; indices read 01/03–03/03 — 8b73f58
+- [x] 3.8 Rows fade up on scroll; screenshot zoom and arrow nudge on hover — 8b73f58
+- [x] 3.9 Mobile shows the screenshot first in every row, with no horizontal scroll — 8b73f58
+- [x] 3.10 Screenshot and text link open the live app in a new tab — 8b73f58
+- [x] 3.11 One focus stop per project with a visible focus ring — 8b73f58
+- [x] 3.12 Screenshots load lazily — 8b73f58
 
 ### Phase 4: Remaining Sections & Docs
 
 #### Automated
 
-- [ ] 4.1 Lint passes
-- [ ] 4.2 Type checking passes
-- [ ] 4.3 Unit tests pass
-- [ ] 4.4 Build passes
-- [ ] 4.5 E2E tests pass
+- [x] 4.1 Lint passes
+- [x] 4.2 Type checking passes
+- [x] 4.3 Unit tests pass
+- [x] 4.4 Build passes
+- [x] 4.5 E2E tests pass
 
 #### Manual
 
-- [ ] 4.6 All sections share the same spacing rhythm and heading style
-- [ ] 4.7 Lighthouse 90+ in all categories on the production build
-- [ ] 4.8 Contact form submit, error and success toasts still work
-- [ ] 4.9 PRD and CLAUDE.md match the shipped page
+- [x] 4.6 All sections share the same spacing rhythm and heading style
+- [x] 4.7 Lighthouse 90+ in all categories on the production build
+- [x] 4.8 Contact form submit, error and success toasts still work
+- [x] 4.9 PRD and CLAUDE.md match the shipped page

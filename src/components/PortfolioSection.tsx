@@ -7,7 +7,7 @@ const PortfolioSection = () => {
   const { heading, projects } = siteData.portfolio;
 
   return (
-    <section id="projects" className="py-24 md:py-32 px-4 border-t border-border" aria-label="Projects">
+    <section id="projects" className="py-24 md:py-32 lg:py-40 px-4 border-t border-border" aria-label="Projects">
       <div className="container mx-auto max-w-6xl">
         <FadeInSection>
           <p className="font-mono text-xs uppercase tracking-[0.12em] text-subtle mb-4">Projects</p>
@@ -38,7 +38,7 @@ const PortfolioSection = () => {
                       height={900}
                       loading="lazy"
                       decoding="async"
-                      className="w-full aspect-[16/10] object-cover object-top rounded-[calc(var(--radius-media)-8px)] transition-transform duration-[600ms] ease-[cubic-bezier(.2,.7,.2,1)] group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:transform-none"
+                      className="w-full aspect-[16/10] object-cover object-top rounded-[calc(var(--radius-media)-8px)] transition-transform duration-[600ms] ease-[cubic-bezier(.2,.7,.2,1)] motion-safe:group-hover:scale-[1.025]"
                     />
                   </a>
                   <div className={`md:col-span-5${screenshotRight ? " md:order-1" : ""}`}>
@@ -56,7 +56,7 @@ const PortfolioSection = () => {
                       className="group font-mono text-sm text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
                     >
                       {new URL(project.url).hostname}{" "}
-                      <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:transform-none">
+                      <span className="inline-block transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5">
                         ↗
                       </span>
                     </a>

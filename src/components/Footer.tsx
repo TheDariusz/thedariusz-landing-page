@@ -5,13 +5,13 @@ import SocialLinks from "@/components/SocialLinks";
 const Footer = () => {
   return (
     <footer className="border-t border-border py-12 px-4" role="contentinfo">
-      <div className="container mx-auto max-w-4xl">
+      <div className="container mx-auto max-w-6xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
           {/* Business Info */}
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Briefcase className="w-4 h-4 text-muted-foreground" />
-              <h3 className="text-xs font-mono uppercase tracking-wider text-muted-foreground">
+              <h3 className="font-mono text-xs uppercase tracking-[0.12em] text-subtle">
                 Business Info
               </h3>
             </div>
@@ -33,7 +33,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-border pt-6">
-          <p className="text-xs text-muted-foreground text-center">
+          <p className="text-xs text-subtle">
             {siteData.footer.copyright}
           </p>
         </div>

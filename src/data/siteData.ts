@@ -123,7 +123,6 @@ export const siteData = {
   },
   contact: {
     heading: "Get in Touch",
-    subheading: "Let's Work Together",
     subtitle: "Have a project in mind or just want to say hello? I'd love to hear from you.",
     location: "Warsaw, Poland",
     submitLabel: "Send Message",

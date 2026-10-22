@@ -17,7 +17,7 @@ npm run typecheck    # TypeScript type check (tsc --build)
 ## PRD & Design Docs
 
 - **`thedariusz-landing-page-prd.md`** — The main PRD. Defines product vision, phased roadmap (Phase 0 MVP → Phase 1 Astro rebuild → Phase 2 blog), brand identity, section specs, non-functional requirements (Lighthouse 90+, accessibility, SEO), contact form architecture (n8n webhook on Hetzner), hosting strategy, and success metrics. Consult this before making any feature or structural decisions.
-- **`lovable-prompt.md`** — The original Lovable.dev prompt used to scaffold the initial version. Contains detailed visual/design specs: color values (`#0f172a` / `#1e293b` alternating backgrounds, `#e11d48` red accent), typography rules, per-section layout details, animation expectations, and responsive behavior. Useful as a visual reference.
+- **`lovable-prompt.md`** — The original Lovable.dev prompt used to scaffold the initial version. Contains detailed visual/design specs: color values (`#0f172a` / `#1e293b` alternating backgrounds, `#e11d48` red accent), typography rules, per-section layout details, animation expectations, and responsive behavior. Historical reference only: its navy palette was superseded by the portfolio redesign (see `context/changes/portfolio-redesign/`).
 
 ## Architecture
 
@@ -25,12 +25,12 @@ Personal landing page built with React 19, TypeScript, Vite 7, Tailwind CSS 4, a
 
 ### Key patterns
 
-- **Single-page app**: No routing — `src/App.tsx` composes section components in order: Header, HeroSection, StatsBar, AboutSection, SkillsSection, ContactSection, Footer, ScrollToTop.
+- **Single-page app**: No routing — `src/pages/Index.tsx` composes section components in order: Header, HeroSection, StatsBar, PortfolioSection, AboutSection, SkillsSection, ContactSection, Footer, ScrollToTop.
 - **Centralized content**: All site copy, nav links, skills, stats, and business info live in `src/data/siteData.ts`. Section components read from this object — edit content there, not in components.
 - **Path alias**: `@/` maps to `./src/` (configured in tsconfig.json and vite.config.ts).
 - **UI components**: `src/components/ui/` contains shadcn/ui primitives (do not edit manually — use `npx shadcn-ui@latest add <component>`). Custom page sections live in `src/components/`.
-- **Animations**: Motion (v12, import from `motion/react`) for entrance animations. Custom Tailwind keyframes (`fade-in-up`, `bounce-subtle`) defined in `src/index.css` `@theme` block.
-- **Styling**: Dark theme only. Tailwind CSS 4 with CSS-first config — all theme tokens in `src/index.css` `@theme` block (no `tailwind.config.ts`). Colors use HSL CSS variables. Custom utility classes defined with `@utility`: `.text-gradient`, `.glow-accent`, `.badge-glow`, `.section-alt`, `.section-deep`, `.accent-underline`.
+- **Animations**: Motion (v12, import from `motion/react`) for entrance animations; `src/App.tsx` wraps the tree in `<MotionConfig reducedMotion="user">`. CSS hover motion (`scale-*`, `translate-*`) must use the `motion-safe:` variant: in Tailwind 4 these set the separate `scale`/`translate` properties, so `motion-reduce:transform-none` does not cancel them. Custom keyframe `fade-in-up` defined in `src/index.css` `@theme` block.
+- **Styling**: Dark theme only. Tailwind CSS 4 with CSS-first config — all theme tokens in `src/index.css` `@theme` block (no `tailwind.config.ts`). Colors use HSL CSS variables: charcoal canvas (`--background`, `#131316`), `--card` surfaces (`#1c1c20`), hairline `--border` (`#2a2a2f`), `--subtle` grey for mono labels, and red (`#e11d48`, `--primary`/`--ring`) used only for primary CTAs, focus rings and the single hero glow. No custom `@utility` classes; sections share inline classes (`py-24 md:py-32 lg:py-40 border-t border-border`, a mono uppercase `text-subtle` eyebrow above a tight-tracked `h2`). `--radius-media` (24px) is for screenshot and form cards.
 - **Fonts**: Inter (sans) and JetBrains Mono (mono), loaded via Google Fonts in `src/index.css`.
 
 ### Testing
