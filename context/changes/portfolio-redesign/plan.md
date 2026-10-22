@@ -499,6 +499,6 @@ Contact keeps its two-column layout, and the contact details are shown as a mono
 #### Manual
 
 - [x] 4.6 All sections share the same spacing rhythm and heading style — fbfa2ff
-- [x] 4.7 Lighthouse 90+ in all categories on the production build — fbfa2ff
+- [ ] 4.7 Lighthouse 90+ in all categories on the production build — impl-review 2026-10-22: desktop 98/100/100/100; mobile 82/100/100/100 (Perf/A11y/BP/SEO). Mobile Perf misses 90 (main: 87); FCP regressed 2.1s → 3.4s. See follow-ups/review-fixes.md
 - [x] 4.8 Contact form submit, error and success toasts still work — fbfa2ff
 - [x] 4.9 PRD and CLAUDE.md match the shipped page — fbfa2ff

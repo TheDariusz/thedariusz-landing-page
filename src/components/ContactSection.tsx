@@ -110,7 +110,7 @@ const ContactSection = () => {
                 onChange={(e) => handleChange("name", e.target.value)}
                 aria-label="Your name"
                 disabled={isSubmitting}
-                className="bg-background border-border focus:border-primary/50 text-foreground placeholder:text-subtle"
+                className="bg-background border-subtle/70 focus:border-primary/50 text-foreground placeholder:text-subtle"
                 required
               />
               {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
@@ -123,7 +123,7 @@ const ContactSection = () => {
                 onChange={(e) => handleChange("email", e.target.value)}
                 aria-label="Your email"
                 disabled={isSubmitting}
-                className="bg-background border-border focus:border-primary/50 text-foreground placeholder:text-subtle"
+                className="bg-background border-subtle/70 focus:border-primary/50 text-foreground placeholder:text-subtle"
                 required
               />
               {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
@@ -136,7 +136,7 @@ const ContactSection = () => {
                 aria-label="Your message"
                 rows={5}
                 disabled={isSubmitting}
-                className="bg-background border-border focus:border-primary/50 text-foreground placeholder:text-subtle resize-none"
+                className="bg-background border-subtle/70 focus:border-primary/50 text-foreground placeholder:text-subtle resize-none"
                 required
               />
               {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}

@@ -38,7 +38,7 @@ const PortfolioSection = () => {
                       height={900}
                       loading="lazy"
                       decoding="async"
-                      className="w-full aspect-[16/10] object-cover object-top rounded-[calc(var(--radius-media)-8px)] transition-transform duration-[600ms] ease-[cubic-bezier(.2,.7,.2,1)] motion-safe:group-hover:scale-[1.025]"
+                      className="w-full aspect-video object-cover object-top rounded-[calc(var(--radius-media)-8px)] transition-transform duration-[600ms] ease-[cubic-bezier(.2,.7,.2,1)] motion-safe:group-hover:scale-[1.025]"
                     />
                   </a>
                   <div className={`md:col-span-5${screenshotRight ? " md:order-1" : ""}`}>
