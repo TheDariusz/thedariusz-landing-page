@@ -2,8 +2,14 @@ import { motion } from "motion/react";
 import { siteData } from "@/data/siteData";
 import { Button } from "@/components/ui/button";
 import CVDownloadButton from "@/components/CVDownloadButton";
-import { ArrowDown, ChevronDown } from "lucide-react";
 import profilePhoto from "@/assets/profile-photo.webp";
+
+// Staggered entrance for the hero text lines, ~80ms apart
+const fadeUp = (step: number) => ({
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { delay: step * 0.08, duration: 0.5 },
+});
 
 const HeroSection = () => {
   const handleScroll = (href: string) => {
@@ -12,84 +18,60 @@ const HeroSection = () => {
   };
 
   return (
-    <section
-      className="relative min-h-screen flex items-center justify-center px-4 pt-20 overflow-hidden"
-      aria-label="Introduction"
-    >
-      {/* Background radial glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-purple-500/3 blur-[100px]" />
+    <section className="relative" aria-label="Introduction">
+      {/* Clip the glow here, not on the section, so it can't cause horizontal scroll */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div className="absolute -top-40 right-[-10%] w-[720px] h-[720px] rounded-full bg-[radial-gradient(closest-side,rgb(225_29_72/0.14),transparent)]" />
       </div>
 
-      <div className="relative text-center max-w-2xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8"
-        >
-          <div className="w-48 h-48 md:w-52 md:h-52 mx-auto rounded-full overflow-hidden ring-2 ring-primary/50 ring-offset-4 ring-offset-background shadow-[0_0_40px_hsl(347_77%_50%/0.15)]">
-            <img
-              src={profilePhoto}
-              alt={`Portrait of ${siteData.name}`}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="text-muted-foreground text-sm font-mono tracking-wider uppercase mb-3"
-        >
-          {siteData.hero.greeting}
-        </motion.p>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4"
-        >
-          {siteData.name}
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-          className="text-sm md:text-base text-muted-foreground mb-10 font-medium tracking-[0.2em] uppercase"
-        >
-          {siteData.tagline}
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <Button
-            size="lg"
-            onClick={() => handleScroll("#contact")}
-            className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 rounded-full"
+      <div className="relative mx-auto max-w-6xl px-4 md:px-6 pt-32 pb-24 md:pt-44 md:pb-32 grid md:grid-cols-12 gap-10 md:gap-12 items-center">
+        <div className="md:col-span-7 order-2 md:order-1">
+          <motion.p
+            {...fadeUp(0)}
+            className="font-mono text-xs uppercase tracking-[0.12em] text-subtle mb-4"
           >
-            <ArrowDown className="w-4 h-4 mr-2" />
-            {siteData.hero.ctaPrimary}
-          </Button>
-          <CVDownloadButton size="lg" className="px-8" />
-        </motion.div>
+            {siteData.hero.greeting}
+          </motion.p>
 
-        {/* Scroll indicator */}
+          <motion.h1
+            {...fadeUp(1)}
+            className="text-5xl md:text-7xl lg:text-[88px] font-semibold tracking-[-0.04em] leading-[0.95] mb-6"
+          >
+            {siteData.name}
+          </motion.h1>
+
+          <motion.p
+            {...fadeUp(2)}
+            className="max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed mb-10"
+          >
+            {siteData.tagline}
+          </motion.p>
+
+          <motion.div {...fadeUp(3)} className="flex flex-wrap gap-3">
+            <Button
+              size="lg"
+              onClick={() => handleScroll("#contact")}
+              className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 rounded-full"
+            >
+              {siteData.hero.ctaPrimary}
+            </Button>
+            <CVDownloadButton size="lg" className="px-8" />
+          </motion.div>
+        </div>
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.5 }}
-          className="mt-16"
+          transition={{ duration: 0.5 }}
+          className="md:col-span-5 order-1 md:order-2"
         >
-          <ChevronDown className="w-6 h-6 mx-auto text-muted-foreground animate-bounce-subtle" />
+          <img
+            src={profilePhoto}
+            width={480}
+            height={480}
+            alt={`Portrait of ${siteData.name}`}
+            className="w-40 h-40 md:w-full md:h-auto md:max-w-[340px] md:ml-auto aspect-square object-cover rounded-full md:rounded-[var(--radius-media)] border border-border"
+          />
         </motion.div>
       </div>
     </section>

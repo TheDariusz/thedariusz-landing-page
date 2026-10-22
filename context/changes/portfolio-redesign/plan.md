@@ -437,34 +437,34 @@ Contact keeps its two-column layout, and the contact details are shown as a mono
 
 #### Automated
 
-- [x] 1.1 No rejected utility remains (grep returns nothing)
-- [x] 1.2 Lint passes
-- [x] 1.3 Type checking passes
-- [x] 1.4 Unit tests pass
-- [x] 1.5 Build passes
-- [x] 1.6 E2E tests pass
+- [x] 1.1 No rejected utility remains (grep returns nothing) — ac37afd
+- [x] 1.2 Lint passes — ac37afd
+- [x] 1.3 Type checking passes — ac37afd
+- [x] 1.4 Unit tests pass — ac37afd
+- [x] 1.5 Build passes — ac37afd
+- [x] 1.6 E2E tests pass — ac37afd
 
 #### Manual
 
-- [x] 1.7 Page canvas is charcoal everywhere; no navy bands remain
-- [x] 1.8 Red appears only on primary CTA backgrounds and focus rings
-- [x] 1.9 CV dropdown, toast and contact inputs look correct on the new palette
+- [x] 1.7 Page canvas is charcoal everywhere; no navy bands remain — ac37afd
+- [x] 1.8 Red appears only on primary CTA backgrounds and focus rings — ac37afd
+- [x] 1.9 CV dropdown, toast and contact inputs look correct on the new palette — ac37afd
 
 ### Phase 2: Header & Hero Editorial Layout
 
 #### Automated
 
-- [ ] 2.1 Lint passes
-- [ ] 2.2 Type checking passes
-- [ ] 2.3 Unit tests pass
-- [ ] 2.4 E2E tests pass
+- [x] 2.1 Lint passes
+- [x] 2.2 Type checking passes
+- [x] 2.3 Unit tests pass
+- [x] 2.4 E2E tests pass
 
 #### Manual
 
-- [ ] 2.5 Hero matches the prototype at 375/768/1440px, with no horizontal scroll from the glow
-- [ ] 2.6 Exactly one subtle red glow; no photo ring and no bounce animation
-- [ ] 2.7 Header shows the GitHub/LinkedIn/X icons and the EN/PL CV dropdown; blur on scroll without a shadow
-- [ ] 2.8 With Reduce motion on, the hero text appears without sliding
+- [x] 2.5 Hero matches the prototype at 375/768/1440px, with no horizontal scroll from the glow
+- [x] 2.6 Exactly one subtle red glow; no photo ring and no bounce animation
+- [x] 2.7 Header shows the GitHub/LinkedIn/X icons and the EN/PL CV dropdown; blur on scroll without a shadow
+- [x] 2.8 With Reduce motion on, the hero text appears without sliding
 
 ### Phase 3: Portfolio ("Projects") Section
 
