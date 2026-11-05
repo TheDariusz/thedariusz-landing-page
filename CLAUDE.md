@@ -45,6 +45,11 @@ Strict mode is off. `noImplicitAny` is disabled but `strictNullChecks` is enable
 
 GitHub Actions workflow (`.github/workflows/ci.yml`) runs on push to `main` and PRs targeting `main`. Steps: lint → typecheck → test → build. Node version read from `.nvmrc` (currently 22).
 
+## Production logs
+
+The landing page ships no logs of its own; the contact form's `contact_form_submitted` lines live in Grafana Cloud Loki under `service="n8n"` (plus `env=prod`, `level`), and uptime is a Synthetic Monitoring check.
+Query them through the read-only `grafana` MCP server declared in `.mcp.json`. Cookbook: `../thedariusz-ops/docs/querying-logs.md`. Raw fallback: the n8n execution log.
+
 # Commits
 - Do not add Co-Authored-By or any AI footer to commit messages
  
